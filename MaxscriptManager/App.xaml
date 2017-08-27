@@ -1,0 +1,166 @@
+﻿<Application x:Class="MaxscriptManager.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:MaxscriptManager.ViewModel"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sgz="clr-namespace:SugzTools.Controls;assembly=SugzTools"
+			 xmlns:ignore="http://www.galasoft.ch/ignore"
+             StartupUri="MMView.xaml"
+             mc:Ignorable="d ignore">
+
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SugzTools;component/Themes/MaxStyles.xaml" />
+                <ResourceDictionary Source="/SugzTools;component/Resources/Colors.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Global View Model Locator -->
+            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+
+            <!-- Dark Panel Color -->
+            <SolidColorBrush x:Key="DarkPanelColor" Color="#FF282828" />
+
+
+            <!-- GridSplitterTemplate -->
+            <Style x:Key="GridSplitterStyle" TargetType="{x:Type GridSplitter}">
+                <Setter Property="Background" Value="{StaticResource DarkPanelColor}" />
+                <Setter Property="Opacity" Value="0" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="Width" Value="7" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GridSplitter}">
+                            <Border x:Name="Bd" Background="{TemplateBinding Background}" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="Control.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.2" To="1" Storyboard.TargetProperty="Opacity" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Control.MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="Opacity" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+
+
+            <!-- Toolbar Base Button Style -->
+            <Style x:Key="ToolbarBaseButtonStyle" TargetType="{x:Type Control}">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{x:Null}" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Height" Value="40" />
+                <Setter Property="VerticalAlignment" Value="Bottom" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="BorderBrush" Value="{StaticResource MaxButtonBorder}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Toolbar Base Button Style -->
+            <Style x:Key="ToolbarButtonStyle" TargetType="{x:Type sgz:SgzButton}" BasedOn="{StaticResource ToolbarBaseButtonStyle}">
+                <Setter Property="PressedBrush" Value="{StaticResource MaxBlueMouseOver}" />
+                <Setter Property="HoverBrush" Value="{StaticResource MaxButtonMouseOver}" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Style.Triggers>
+                    <Trigger Property="IsPressed" Value="true">
+                        <Setter Property="Foreground" Value="White" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Open Options CheckButton -->
+            <Style x:Key="OptionButtonStyle" TargetType="{x:Type sgz:SgzCheckButton}" BasedOn="{StaticResource ToolbarBaseButtonStyle}">
+                <Setter Property="PressedBrush" Value="{StaticResource MaxBlueMouseOver}" />
+                <Setter Property="HoverBrush" Value="{StaticResource MaxButtonMouseOver}" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Style.Triggers>
+                    <Trigger Property="IsPressed" Value="true">
+                        <Setter Property="Foreground" Value="White" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
+            <!-- Validate Path Textbox -->
+            <Style x:Key="ValidatePathTextBoxStyle" TargetType="{x:Type sgz:SgzTextBox}">
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Height" Value="Auto" />
+                <Setter Property="Padding" Value="2,0" />
+                <Setter Property="Margin" Value="5,4,0,4" />
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="true">
+                        <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
+            <!-- Status panel TextBlock -->
+            <Style x:Key="StatusPanelTextBlockStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{StaticResource MaxText}" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,0,10,0" />
+                <Setter Property="MinWidth" Value="175" />
+            </Style>
+
+
+            <!--FlowDocument Styles-->
+            <Style x:Key="FlowDocumentStyle" TargetType="{x:Type FlowDocument}">
+                <Setter Property="PagePadding" Value="5,10,5,5" />
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Cursor" Value="Arrow" />
+                <Setter Property="TextAlignment" Value="Left" />
+            </Style>
+
+            <Style x:Key="ParagraphStyle" TargetType="{x:Type Paragraph}">
+                <Setter Property="Block.Margin" Value="0" />
+            </Style>
+
+            <Style x:Key="ListStyle" TargetType="{x:Type List}">
+                <Setter Property="Block.Padding" Value="20,0,0,0" />
+            </Style>
+
+            <Style x:Key="FolderChildrenRunStyle" TargetType="{x:Type Run}">
+                <Setter Property="Foreground" Value="{StaticResource MaxText}" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="White" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="EmailRunStyle" TargetType="{x:Type Run}">
+                <Setter Property="FontStyle" Value="Italic" />
+                <Setter Property="TextDecorations" Value="Underline" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="White" />
+                    </Trigger>
+                </Style.Triggers>
+
+            </Style>
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

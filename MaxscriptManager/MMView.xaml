@@ -1,0 +1,129 @@
+﻿<Window x:Class="MaxscriptManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaxscriptManager.Control"
+        xmlns:sgz="clr-namespace:SugzTools.Controls;assembly=SugzTools"
+        xmlns:c="clr-namespace:SugzTools.Converters;assembly=SugzTools"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        mc:Ignorable="d ignore"
+        Title="SugzTools Maxscript Manager"
+        Height="500"
+        Width="1000"
+        Background="{StaticResource MaxBackground}"
+        Icon="Resource/MaxscriptManager.ico"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+    <Window.Resources>
+        <c:InvertVisibilityConverter x:Key="InvertVisibility" />
+        <c:InvertableBooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Toolbar Panel -->
+        <sgz:SgzSlidingDockPanel x:Name="Toolbar"
+                                 Background="{DynamicResource DarkPanelColor}"
+                                 Width="50"
+                                 CloseSize="50"
+                                 OpenSize="135"
+                                 AnimationDuration="250"
+                                 LastChildFill="False">
+            <sgz:SgzButton x:Name="AddFolderBtn"
+                           Command="{Binding Data.AddFolderCommand, Source={StaticResource Locator}}"
+                           DockPanel.Dock="Top"
+                           Margin="0,5,0,0"
+                           ToolTip="Add a folder to the list"
+                           Style="{DynamicResource ToolbarButtonStyle}">
+                <DockPanel HorizontalAlignment="Center">
+                    <sgz:SgzIcon Icon="MdiFolderPlus"
+                                 Width="25"
+                                 Height="22"
+                                 Margin="12,7,11,5"
+                                 Foreground="{Binding Foreground, ElementName=AddFolderBtn}"
+                                 IsEnabled="False" />
+                    <TextBlock Text="ADD FOLDER"
+                               VerticalAlignment="Center"
+                               Foreground="{Binding Foreground, ElementName=AddFolderBtn}"
+                               Visibility="{Binding IsOpen, ElementName=Toolbar, Converter={StaticResource BoolToVisibility}}" />
+                </DockPanel>
+            </sgz:SgzButton>
+        </sgz:SgzSlidingDockPanel>
+
+
+        <!-- Data treeview -->
+        <local:EditableTreeView Grid.Column="1"
+                                ItemsSource="{Binding Data.Datas, Source={StaticResource Locator}}"
+                                Background="Transparent"
+                                BorderBrush="{DynamicResource MaxRolloutBorder}"
+                                BorderThickness="1,0"
+                                Foreground="{DynamicResource MaxText}"
+                                Padding="0,10,0,0"
+                                HorizontalContentAlignment="Stretch" />
+
+        <!--FlowDocumentScrollViewer-->
+        <DockPanel Grid.Column="2"
+                   Grid.ColumnSpan="2">
+            <DockPanel DockPanel.Dock="Bottom"
+                       Height="30"
+                       LastChildFill="False"
+                       Background="{DynamicResource DarkPanelColor}">
+                <sgz:SgzCheckButton Content="DESCRIPTION"
+                                    IsChecked="{Binding Description.ShowCode, Converter={StaticResource InvertBool}}"
+                                    BorderThickness="0"
+                                    IsTransparent="True"
+                                    CornerRadius="0"
+                                    CheckedBrush="{DynamicResource MaxBackground}"
+                                    DockPanel.Dock="Right"
+                                    VerticalAlignment="Stretch"
+                                    Height="Auto"
+                                    Width="75"
+                                    DataContext="{Binding Source={StaticResource Locator}}" />
+                <sgz:SgzCheckButton Content="CODE"
+                                    IsChecked="{Binding Description.ShowCode}"
+                                    BorderThickness="0"
+                                    IsTransparent="True"
+                                    CornerRadius="0"
+                                    CheckedBrush="{DynamicResource MaxBackground}"
+                                    DockPanel.Dock="Right"
+                                    VerticalAlignment="Stretch"
+                                    Height="Auto"
+                                    Width="75"
+                                    DataContext="{Binding Source={StaticResource Locator}}" />
+                <sgz:SgzCheckBox Content="EDIT"
+                                 IsSwitch="True"
+                                 BorderThickness="0"
+                                 CheckedBrush="{DynamicResource MaxBlue}"
+                                 Height="13"
+                                 HorizontalContentAlignment="Right"
+                                 Spacing="10"
+                                 DockPanel.Dock="Left"
+                                 VerticalAlignment="Center" 
+                                 Margin="10,0"/>
+            </DockPanel>
+
+            <FlowDocumentScrollViewer  Foreground="{DynamicResource MaxText}"
+                                       BorderThickness="0"
+                                       Margin="7,0,0,0"
+                                       ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                       Document="{Binding Description.Document, Source={StaticResource Locator}}" />
+        </DockPanel>
+
+        <!-- GridSplitter -->
+        <GridSplitter Grid.Column="2"
+                      Style="{DynamicResource GridSplitterStyle}" />
+        
+
+    </Grid>
+</Window>
