@@ -22,11 +22,9 @@ namespace MaxscriptManager.ViewModel
         private MMDataItem _SelectedItem;
 
         private RelayCommand _AddFolderCommand;
-
+        private RelayCommand _AddFileCommand;
 
         #endregion Fields
-
-
 
 
         #region Properties
@@ -55,10 +53,12 @@ namespace MaxscriptManager.ViewModel
         /// <summary>
         /// Get the command to add a folder the the data list
         /// </summary>
-        public RelayCommand AddFolderCommand
-        {
-            get => _AddFolderCommand ?? (_AddFolderCommand = new RelayCommand(AddFolder));
-        } 
+        public RelayCommand AddFolderCommand => _AddFolderCommand ?? (_AddFolderCommand = new RelayCommand(AddFolder));
+
+        /// <summary>
+        /// Get the command to add a file the the data list
+        /// </summary>
+        public RelayCommand AddFileCommand => _AddFileCommand ?? (_AddFileCommand = new RelayCommand(AddFile));
 
 
         #endregion Properties
@@ -72,6 +72,15 @@ namespace MaxscriptManager.ViewModel
         {
             if (_Browser.GetFolder() is string selectedFolder && !Datas.Any(x => x.Path.Equals(selectedFolder)))
                 Datas.Add(new MMFolder(selectedFolder));
+        }
+
+        /// <summary>
+        /// Let the user choose a file to add to the folders list if it doesn't exist already
+        /// </summary>
+        private void AddFile()
+        {
+            if (_Browser.GetFile() is string selectedFile && !Datas.Any(x => x.Path.Equals(selectedFile)))
+                Datas.Add(new MMScript(null, selectedFile));
         }
     }
 }

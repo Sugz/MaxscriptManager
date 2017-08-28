@@ -13,18 +13,20 @@ namespace MaxscriptManager.Model
 {
     public class MMScript : MMCodeItem, IMMPathItem
     {
+
         #region Fields
 
         public const string UseModify = "*Use / Modify this script at your own risk !*";
         public const string descriptionStart = "/*##############################################################################";
         public const string descriptionEnd = "###############################################################################*/";
 
-        //private string _Text;
+
         private bool _IsValidPath;
         private string _Path;
 
 
         #endregion Fields
+
 
         #region Properties
 
@@ -47,16 +49,11 @@ namespace MaxscriptManager.Model
             {
                 Set(ref _Path, value);
                 IsValidPath = File.Exists(Path);
-                if (IsValidPath && Code is null)
-                    Code = GetCode();
+                if (IsValidPath && Children is null)
+                    Children = GetChildren();
             }
         }
         public string RelativePath => throw new NotImplementedException();
-        public override StringCollection Code
-        {
-            get => base.Code ?? (base.Code = GetCode());
-            set => base.Code = value;
-        }
 
 
         #endregion Properties
@@ -74,20 +71,25 @@ namespace MaxscriptManager.Model
         #endregion Constructors
 
 
-
-        private StringCollection GetCode()
+        /// <summary>
+        /// Get all the script code, then get the desciprtion and children
+        /// </summary>
+        /// <returns></returns>
+        protected override ObservableCollection<MMDataItem> GetChildren()
         {
             if (!IsValidPath)
                 return null;
 
+            StringCollection code = new StringCollection();
+            ObservableCollection<MMDataItem> children = new ObservableCollection<MMDataItem>();
             StreamReader streamReader = new StreamReader(Path, Encoding.GetEncoding("iso-8859-1"));
             PeekableStreamReaderAdapter peekStreamReader = new PeekableStreamReaderAdapter(streamReader);
-            StringCollection code = new StringCollection();
             while (!streamReader.EndOfStream)
             {
                 string line = peekStreamReader.PeekLine();
                 line = line.TrimStart().ToLower();
 
+                // Create the description
                 if (line == descriptionStart)
                 {
                     StringCollection description = new StringCollection();
@@ -100,16 +102,14 @@ namespace MaxscriptManager.Model
                     Description = description;
                 }
 
+                // Get the children
                 else if (Array.FindIndex(_ClassDef, x => line.Contains(x)) is int index && index != -1)
                 {
                     MMDataType type = MMDataType.Struct;
                     if (index == 1) type = MMDataType.Rollout;
                     if (index == 2 || index == 3) type = MMDataType.Function;
 
-                    if (Children is null)
-                        Children = new ObservableCollection<MMDataItem>();
                     string text = line.Trim("\t".ToCharArray());
-
                     StringCollection childCode = new StringCollection();
                     int openCount = 0, closeCount = 0;
                     while (!streamReader.EndOfStream)
@@ -122,16 +122,16 @@ namespace MaxscriptManager.Model
                         if (openCount != 0 && closeCount == openCount)
                             break;
                     }
-                    //child.Code = childCode;
-                    Children.Add(new MMCodeItem(this, text, type, childCode));
+                    children.Add(new MMCodeItem(this, text, type, childCode));
                 }
 
                 else
                     code.Add(peekStreamReader.ReadLine());
             }
 
+            Code = code;
             streamReader.Close();
-            return code;
+            return children;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SugzTools.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -13,26 +14,16 @@ namespace MaxscriptManager.Model
 
         #region Fields
 
-        protected readonly string[] _ClassDef = { "struct", "rollout", "fn", "function" };
-        //protected StringCollection _Description;
-        //protected StringCollection _Code;
-
+        protected readonly string[] _ClassDef = { "struct", "rollout", "fn", "function", "attributes", "macroscript", "parameters" };
+        protected readonly string[] _ComDelimiters = { "/*", "*/", "--" };
 
         #endregion Fields
 
 
         #region Properties
 
-        public virtual StringCollection Description { get; protected set; }
-        //{
-        //    get => _Description ?? (Children = GetChildren());
-        //    set => _Description = value;
-        //}
-        public virtual StringCollection Code { get; set; }
-        //{
-        //    get => _Code;
-        //    set => _Code = value;
-        //} 
+        public StringCollection Description { get; protected set; }
+        public StringCollection Code { get; protected set; }
 
 
         #endregion Properties
@@ -71,9 +62,42 @@ namespace MaxscriptManager.Model
         #region Methods
 
 
+
+
         protected override ObservableCollection<MMDataItem> GetChildren()
         {
             ObservableCollection<MMDataItem> children = new ObservableCollection<MMDataItem>();
+            for (int i = 0; i < Code.Count; i++)
+            {
+                string line = Code[i].TrimStart('\t');
+
+                //Read line and check if it has comment => check what before the comments
+                //Escape until the comment end
+                string[] lineParts = line.SplitAndKeep(_ComDelimiters).ToArray();
+                if (_ComDelimiters.Any(x => lineParts[0].Contains(x)))
+                {
+
+                }
+
+                if (Array.FindIndex(_ClassDef, x => line.Contains(x)) is int index && index != -1)
+                {
+                    // struct
+                    if (index == 0)
+                    {
+                        
+                    }
+                    // rollout
+                    else if (index == 1)
+                    {
+
+                    }
+                    // function
+                    else
+                    {
+
+                    }
+                }
+            }
             //for (int i = 1; i < Code.Count; i++)
             //{ 
             //    string line = Code[i];
@@ -84,7 +108,7 @@ namespace MaxscriptManager.Model
             //        if (index == 1) type = MMDataType.Rollout;
             //        if (index == 2 || index == 3) type = MMDataType.Function;
 
-                    
+
 
             //        StringCollection childCode = new StringCollection();
             //        int openCount = 0, closeCount = 0;

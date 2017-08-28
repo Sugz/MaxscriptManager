@@ -9,8 +9,8 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
         Title="SugzTools Maxscript Manager"
-        Height="500"
-        Width="1000"
+        Height="720"
+        Width="1280"
         Background="{StaticResource MaxBackground}"
         Icon="Resource/MaxscriptManager.ico"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
@@ -56,6 +56,25 @@
                     <TextBlock Text="ADD FOLDER"
                                VerticalAlignment="Center"
                                Foreground="{Binding Foreground, ElementName=AddFolderBtn}"
+                               Visibility="{Binding IsOpen, ElementName=Toolbar, Converter={StaticResource BoolToVisibility}}" />
+                </DockPanel>
+            </sgz:SgzButton>
+            <sgz:SgzButton x:Name="AddFileBtn"
+                           Command="{Binding Data.AddFileCommand, Source={StaticResource Locator}}"
+                           DockPanel.Dock="Top"
+                           Margin="0,5,0,0"
+                           ToolTip="Add a file to the list"
+                           Style="{DynamicResource ToolbarButtonStyle}">
+                <DockPanel HorizontalAlignment="Center">
+                    <sgz:SgzIcon Icon="MdiFilePlus"
+                                 Width="22"
+                                 Height="22"
+                                 Margin="16,5,10,5"
+                                 Foreground="{Binding Foreground, ElementName=AddFileBtn}"
+                                 IsEnabled="False" />
+                    <TextBlock Text="ADD FILE"
+                               VerticalAlignment="Center"
+                               Foreground="{Binding Foreground, ElementName=AddFileBtn}"
                                Visibility="{Binding IsOpen, ElementName=Toolbar, Converter={StaticResource BoolToVisibility}}" />
                 </DockPanel>
             </sgz:SgzButton>
