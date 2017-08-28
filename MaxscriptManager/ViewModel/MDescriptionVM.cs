@@ -13,14 +13,14 @@ using System.Windows.Documents;
 
 namespace MaxscriptManager.ViewModel
 {
-    public class MMDescriptionVM : ViewModelBase
+    public class MDescriptionVM : ViewModelBase
     {
 
         #region Fields
 
 
-        private bool _ShowCode = false;
-        private MMDataItem _SelectedItem;                                                                   // Treeview selected item
+        private bool _ShowCode = true;
+        private MDataItem _SelectedItem;                                                                   // Treeview selected item
         private FlowDocument _Document;                                                                     // The flowdocument 
 
 
@@ -48,9 +48,9 @@ namespace MaxscriptManager.ViewModel
         /// <summary>
         /// Treeview selected item. Set the flowdocument when updated
         /// </summary>
-        public MMDataItem SelectedItem
+        public MDataItem SelectedItem
         {
-            get { return _SelectedItem; }
+            get => _SelectedItem;
             set
             {
                 _SelectedItem = value;
@@ -68,8 +68,8 @@ namespace MaxscriptManager.ViewModel
         /// </summary>
         public FlowDocument Document
         {
-            get { return _Document; }
-            set { Set(ref _Document, value); }
+            get => _Document;
+            set => Set(ref _Document, value);
         }
 
 
@@ -79,10 +79,10 @@ namespace MaxscriptManager.ViewModel
         #region Constructor
 
 
-        public MMDescriptionVM()
+        public MDescriptionVM()
         {
             // Get selected treeview item
-            MessengerInstance.Register<MMSelectedItemMessage>(this, x => SelectedItem = x.NewItem);
+            MessengerInstance.Register<MSelectedItemMessage>(this, x => SelectedItem = x.NewItem);
         }
 
 
@@ -112,11 +112,10 @@ namespace MaxscriptManager.ViewModel
                 InitializeDocument();
             Document.Blocks.Clear();
 
-            if ((SelectedItem as MMCodeItem) is MMCodeItem item)
+            if ((SelectedItem as MCodeItem) is MCodeItem item)
             {
-                StringCollection strs = ShowCode ? item.Code : item.Description;
-                foreach (string s in strs)
-                    Document.Blocks.Add(new Paragraph(new Run(s)));
+                if (ShowCode)
+                    MParser.FormatCode(item.Code, ref _Document);
             }
 
         }

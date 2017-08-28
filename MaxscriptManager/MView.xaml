@@ -1,4 +1,4 @@
-﻿<Window x:Class="MaxscriptManager.MainWindow"
+﻿<Window x:Class="MaxscriptManager.MView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +11,6 @@
         Title="SugzTools Maxscript Manager"
         Height="720"
         Width="1280"
-        Background="{StaticResource MaxBackground}"
         Icon="Resource/MaxscriptManager.ico"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
 
@@ -24,7 +23,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -80,46 +78,43 @@
             </sgz:SgzButton>
         </sgz:SgzSlidingDockPanel>
 
-
         <!-- Data treeview -->
         <local:EditableTreeView Grid.Column="1"
                                 ItemsSource="{Binding Data.Datas, Source={StaticResource Locator}}"
-                                Background="Transparent"
-                                BorderBrush="{DynamicResource MaxRolloutBorder}"
+                                BorderBrush="{DynamicResource MaxButtonBorder}"
                                 BorderThickness="1,0"
                                 Foreground="{DynamicResource MaxText}"
                                 Padding="0,10,0,0"
-                                HorizontalContentAlignment="Stretch" />
+                                HorizontalContentAlignment="Stretch"
+                                Background="{DynamicResource MaxButtonMouseOver}" />
 
         <!--FlowDocumentScrollViewer-->
         <DockPanel Grid.Column="2"
-                   Grid.ColumnSpan="2">
-            <DockPanel DockPanel.Dock="Bottom"
+                   Background="{DynamicResource DarkPanelColor}">
+            <DockPanel DockPanel.Dock="Top"
                        Height="30"
                        LastChildFill="False"
-                       Background="{DynamicResource DarkPanelColor}">
-                <sgz:SgzCheckButton Content="DESCRIPTION"
-                                    IsChecked="{Binding Description.ShowCode, Converter={StaticResource InvertBool}}"
-                                    BorderThickness="0"
-                                    IsTransparent="True"
-                                    CornerRadius="0"
-                                    CheckedBrush="{DynamicResource MaxBackground}"
-                                    DockPanel.Dock="Right"
-                                    VerticalAlignment="Stretch"
-                                    Height="Auto"
-                                    Width="75"
-                                    DataContext="{Binding Source={StaticResource Locator}}" />
-                <sgz:SgzCheckButton Content="CODE"
-                                    IsChecked="{Binding Description.ShowCode}"
-                                    BorderThickness="0"
-                                    IsTransparent="True"
-                                    CornerRadius="0"
-                                    CheckedBrush="{DynamicResource MaxBackground}"
-                                    DockPanel.Dock="Right"
-                                    VerticalAlignment="Stretch"
-                                    Height="Auto"
-                                    Width="75"
-                                    DataContext="{Binding Source={StaticResource Locator}}" />
+                       Background="{DynamicResource MaxButtonMouseOver}">
+                <sgz:SgzFlatCheckButton Content="DESCRIPTION"
+                                        IsChecked="{Binding Description.ShowCode, Converter={StaticResource InvertBool}, Source={StaticResource Locator}}"
+                                        DockPanel.Dock="Left"
+                                        VerticalAlignment="Stretch"
+                                        Height="Auto"
+                                        Width="100"
+                                        Margin="0,2,0,0"
+                                        PartCheckDock="Top"
+                                        Background="{DynamicResource MaxButtonMouseOver}"
+                                        CheckedBrush="{DynamicResource DarkPanelColor}" />
+                <sgz:SgzFlatCheckButton Content="CODE"
+                                        IsChecked="{Binding Description.ShowCode, Source={StaticResource Locator}}"
+                                        DockPanel.Dock="Left"
+                                        VerticalAlignment="Stretch"
+                                        Height="Auto"
+                                        Width="100"
+                                        Margin="0,2,0,0"
+                                        PartCheckDock="Top"
+                                        Background="{DynamicResource MaxButtonMouseOver}"
+                                        CheckedBrush="{DynamicResource DarkPanelColor}" />
                 <sgz:SgzCheckBox Content="EDIT"
                                  IsSwitch="True"
                                  BorderThickness="0"
@@ -127,22 +122,65 @@
                                  Height="13"
                                  HorizontalContentAlignment="Right"
                                  Spacing="10"
-                                 DockPanel.Dock="Left"
+                                 DockPanel.Dock="Right"
                                  VerticalAlignment="Center" 
                                  Margin="10,0"/>
             </DockPanel>
-
+            <TextBlock />
             <FlowDocumentScrollViewer  Foreground="{DynamicResource MaxText}"
                                        BorderThickness="0"
                                        Margin="7,0,0,0"
                                        ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                       Document="{Binding Description.Document, Source={StaticResource Locator}}" />
+                                       Document="{Binding Description.Document, Source={StaticResource Locator}}"/>
         </DockPanel>
 
         <!-- GridSplitter -->
-        <GridSplitter Grid.Column="2"
-                      Style="{DynamicResource GridSplitterStyle}" />
-        
+        <GridSplitter Grid.Column="1"
+                      Style="{DynamicResource GridSplitterStyle}"
+                      />
+
+        <!-- Status panel -->
+        <Border Background="{DynamicResource DarkPanelColor}"
+                BorderBrush="{DynamicResource MaxButtonBorder}"
+                BorderThickness="0,1,0,0"
+                Grid.ColumnSpan="4"
+                Grid.Row="1">
+            <sgz:SgzSlidingDockPanel VerticalAlignment="Bottom"
+                                     CloseSize="0"
+                                     OpenSize="30"
+                                     AnimationType="Height"
+                                     Height="0"
+                                     IsOpen="{Binding StatusPanelIsOpen}"
+                                     ShowButton="False">
+                <Grid>
+                    <!-- Data path field -->
+                    <DockPanel Visibility="{Binding Data.DataPathFieldVisibility, Source={StaticResource Locator}}">
+                        <sgz:SgzYesNoButton Command="{Binding Data.ValidateDataPathCommand, Mode=OneWay, Source={StaticResource Locator}}"
+                                            DockPanel.Dock="Right"
+                                            Height="Auto"
+                                            Width="35"
+                                            Padding="2"
+                                            Margin="0,4" />
+                        <sgz:SgzTextBox Text="{Binding Data.DataPathField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Source={StaticResource Locator}, ValidatesOnDataErrors=True}"
+                                        Style="{DynamicResource ValidatePathTextBoxStyle}" />
+                    </DockPanel>
+
+                    <!-- Status -->
+                    <DockPanel Margin="5,0">
+                        <TextBlock Text="{Binding Status}"
+                                   Style="{DynamicResource StatusPanelTextBlockStyle}" />
+                        <sgz:SgzProgressBar x:Name="progressBar"
+                                            Grid.Row="1"
+                                            Grid.ColumnSpan="4"
+                                            Value="{Binding Progress}"
+                                            Height="10"
+                                            Visibility="{Binding ProgressBarVisibility}" />
+                    </DockPanel>
+
+                </Grid>
+            </sgz:SgzSlidingDockPanel>
+        </Border>
+
 
     </Grid>
 </Window>

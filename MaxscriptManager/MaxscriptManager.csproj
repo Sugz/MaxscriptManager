@@ -81,22 +81,23 @@
     <Compile Include="Control\EditableTreeView.xaml.cs">
       <DependentUpon>EditableTreeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Source\Message\MMSelectedItemMessage.cs" />
-    <Compile Include="Model\Base\MMCodeItem.cs" />
-    <Compile Include="Model\Base\MMDataItem.cs" />
-    <Compile Include="Model\MMFolder.cs" />
-    <Compile Include="Model\MMScript.cs" />
+    <Compile Include="Source\Message\MSelectedItemMessage.cs" />
+    <Compile Include="Model\MCodeItem.cs" />
+    <Compile Include="Model\MDataItem.cs" />
+    <Compile Include="Model\MFolder.cs" />
+    <Compile Include="Model\MScript.cs" />
     <Compile Include="Source\Converter\TextToInlinesConverter.cs" />
-    <Compile Include="Source\MMConstants.cs" />
-    <Compile Include="ViewModel\MMDataVM.cs" />
-    <Compile Include="ViewModel\MMDescriptionVM.cs" />
-    <Compile Include="ViewModel\MMMainVM.cs" />
+    <Compile Include="Source\MConstants.cs" />
+    <Compile Include="Source\MParser.cs" />
+    <Compile Include="ViewModel\MDataVM.cs" />
+    <Compile Include="ViewModel\MDescriptionVM.cs" />
+    <Compile Include="ViewModel\MMainVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Control\EditableTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MMView.xaml">
+    <Page Include="MView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -104,8 +105,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MMView.xaml.cs">
-      <DependentUpon>MMView.xaml</DependentUpon>
+    <Compile Include="MView.xaml.cs">
+      <DependentUpon>MView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

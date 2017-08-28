@@ -38,13 +38,13 @@ namespace MaxscriptManager.Model
     }
 
 
-    public abstract class MMDataItem : ViewModelBase
+    public abstract class MDataItem : ViewModelBase
     {
 
         #region Fields
 
         protected string _Text;
-        protected ObservableCollection<MMDataItem> _Children;
+        protected ObservableCollection<MDataItem> _Children;
         private bool _IsSelected = false;
         private bool _IsExpanded;
 
@@ -76,7 +76,7 @@ namespace MaxscriptManager.Model
         /// <summary>
         /// Get the treeviewitem children
         /// </summary>
-        public virtual ObservableCollection<MMDataItem> Children
+        public virtual ObservableCollection<MDataItem> Children
         {
             get => _Children ?? (_Children = GetChildren());
             set => Set(ref _Children, value);
@@ -91,7 +91,7 @@ namespace MaxscriptManager.Model
             set
             {
                 Set(ref _IsSelected, value);
-                MessengerInstance.Send(new MMSelectedItemMessage(this));
+                MessengerInstance.Send(new MSelectedItemMessage(this));
             }
         }
 
@@ -109,7 +109,7 @@ namespace MaxscriptManager.Model
 
 
 
-        protected abstract ObservableCollection<MMDataItem> GetChildren();
+        protected abstract ObservableCollection<MDataItem> GetChildren();
 
     }
 }

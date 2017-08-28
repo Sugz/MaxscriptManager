@@ -8,10 +8,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MaxscriptManager.ViewModel
 {
-    public class MMDataVM : ViewModelBase
+    public class MDataVM : ViewModelBase
     {
 
         #region Fields
@@ -19,7 +20,9 @@ namespace MaxscriptManager.ViewModel
 
         private Browser _Browser = new Browser();
 
-        private MMDataItem _SelectedItem;
+        private MDataItem _SelectedItem;
+
+        private Visibility _DataPathFieldVisibility = Visibility.Collapsed;
 
         private RelayCommand _AddFolderCommand;
         private RelayCommand _AddFileCommand;
@@ -27,25 +30,36 @@ namespace MaxscriptManager.ViewModel
         #endregion Fields
 
 
+
         #region Properties
 
 
         /// <summary>
-        /// The collection of CDFolders that will be displayed in the treeview
+        /// Get the collection of DataItem that will be displayed in the treeview
         /// </summary>
         public ObservableCollection<IMMPathItem> Datas { get; set; } = new ObservableCollection<IMMPathItem>();
 
         /// <summary>
-        /// 
+        /// Get the current treeview selected item
         /// </summary>
-        public MMDataItem SelectedItem
+        public MDataItem SelectedItem
         {
             get => _SelectedItem;
-            set
+            private set
             {
                 _SelectedItem = value;
                 //SetStatusPanel();
             }
+        }
+
+
+        /// <summary>
+        /// Get the data path field visibility
+        /// </summary>
+        public Visibility DataPathFieldVisibility
+        {
+            get => _DataPathFieldVisibility;
+            private set => Set(ref _DataPathFieldVisibility, value);
         }
 
 
@@ -65,13 +79,16 @@ namespace MaxscriptManager.ViewModel
 
 
 
+        #region Methods
+
+
         /// <summary>
         /// Let the user choose a folder to add to the folders list if it doesn't exist already
         /// </summary>
         private void AddFolder()
         {
             if (_Browser.GetFolder() is string selectedFolder && !Datas.Any(x => x.Path.Equals(selectedFolder)))
-                Datas.Add(new MMFolder(selectedFolder));
+                Datas.Add(new MFolder(selectedFolder));
         }
 
         /// <summary>
@@ -80,7 +97,10 @@ namespace MaxscriptManager.ViewModel
         private void AddFile()
         {
             if (_Browser.GetFile() is string selectedFile && !Datas.Any(x => x.Path.Equals(selectedFile)))
-                Datas.Add(new MMScript(null, selectedFile));
+                Datas.Add(new MScript(null, selectedFile));
         }
-    }
+    } 
+
+
+    #endregion Methods
 }

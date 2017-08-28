@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MaxscriptManager.Model
 {
-    public class MMCodeItem : MMDataItem
+    public class MCodeItem : MDataItem
     {
 
         #region Fields
@@ -32,22 +32,22 @@ namespace MaxscriptManager.Model
         #region Constructors
 
 
-        public MMCodeItem(object parent)
+        public MCodeItem(object parent)
         {
             Parent = parent;
         }
-        public MMCodeItem(object parent, MMDataType type )
+        public MCodeItem(object parent, MMDataType type )
         {
             Parent = parent;
             DataType = type;
         }
-        public MMCodeItem(object parent, string text, MMDataType type)
+        public MCodeItem(object parent, string text, MMDataType type)
         {
             Parent = parent;
             Text = text;
             DataType = type;
         }
-        public MMCodeItem(object parent, string text, MMDataType type, StringCollection code)
+        public MCodeItem(object parent, string text, MMDataType type, StringCollection code)
         {
             Parent = parent;
             Text = text;
@@ -64,40 +64,42 @@ namespace MaxscriptManager.Model
 
 
 
-        protected override ObservableCollection<MMDataItem> GetChildren()
+        protected override ObservableCollection<MDataItem> GetChildren()
         {
-            ObservableCollection<MMDataItem> children = new ObservableCollection<MMDataItem>();
-            for (int i = 0; i < Code.Count; i++)
-            {
-                string line = Code[i].TrimStart('\t');
+            ObservableCollection<MDataItem> children = new ObservableCollection<MDataItem>();
+            //for (int i = 0; i < Code.Count; i++)
+            //{
+            //    string line = Code[i].TrimStart('\t');
 
-                //Read line and check if it has comment => check what before the comments
-                //Escape until the comment end
-                string[] lineParts = line.SplitAndKeep(_ComDelimiters).ToArray();
-                if (_ComDelimiters.Any(x => lineParts[0].Contains(x)))
-                {
+            //    //Read line and check if it has comment => check what before the comments
+            //    //Escape until the comment end
+            //    string[] lineParts = line.SplitAndKeep(_ComDelimiters).ToArray();
+            //    if (_ComDelimiters.Any(x => lineParts[0].Contains(x)))
+            //    {
 
-                }
+            //    }
 
-                if (Array.FindIndex(_ClassDef, x => line.Contains(x)) is int index && index != -1)
-                {
-                    // struct
-                    if (index == 0)
-                    {
+            //    if (Array.FindIndex(_ClassDef, x => line.Contains(x)) is int index && index != -1)
+            //    {
+            //        // struct
+            //        if (index == 0)
+            //        {
                         
-                    }
-                    // rollout
-                    else if (index == 1)
-                    {
+            //        }
+            //        // rollout
+            //        else if (index == 1)
+            //        {
 
-                    }
-                    // function
-                    else
-                    {
+            //        }
+            //        // function
+            //        else
+            //        {
 
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
+
+
             //for (int i = 1; i < Code.Count; i++)
             //{ 
             //    string line = Code[i];

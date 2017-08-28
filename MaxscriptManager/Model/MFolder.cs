@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MaxscriptManager.Model
 {
-    public class MMFolder : MMDataItem, IMMPathItem
+    public class MFolder : MDataItem, IMMPathItem
     {
 
         #region Fields
@@ -60,7 +60,7 @@ namespace MaxscriptManager.Model
         #endregion Properties
 
 
-        public MMFolder(string path, ObservableCollection<MMDataItem> children = null)
+        public MFolder(string path, ObservableCollection<MDataItem> children = null)
         {
             Path = path;
             if (children != null)
@@ -70,15 +70,15 @@ namespace MaxscriptManager.Model
 
 
 
-        protected override ObservableCollection<MMDataItem> GetChildren()
+        protected override ObservableCollection<MDataItem> GetChildren()
         {
             if (!IsValidPath)
                 return null;
 
-            ObservableCollection<MMDataItem> children = new ObservableCollection<MMDataItem>();
+            ObservableCollection<MDataItem> children = new ObservableCollection<MDataItem>();
             //Directory.GetFiles(Path).ForEach(x => children.Add(new MMScript(this, x)));
             foreach(string file in Directory.GetFiles(Path))
-                children.Add(new MMScript(this, file));
+                children.Add(new MScript(this, file));
             return children;
 
         }

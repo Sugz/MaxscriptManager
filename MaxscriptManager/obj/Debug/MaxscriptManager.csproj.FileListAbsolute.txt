@@ -37,5 +37,5 @@ D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\bin\Debug\Microsoft.WindowsA
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\bin\Debug\Autodesk.Max.xml
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\Control\EditableTreeView.g.cs
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\Control\EditableTreeView.baml
-D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\MMView.g.cs
-D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\MMView.baml
+D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\MView.g.cs
+D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\MView.baml

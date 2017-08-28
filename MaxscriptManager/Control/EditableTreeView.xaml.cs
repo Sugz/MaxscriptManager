@@ -78,7 +78,7 @@ namespace MaxscriptManager.Control
         {
             ItemTemplateSelector = new SgzDataTemplateSelector();
             ((SgzDataTemplateSelector)ItemTemplateSelector).Templates.Add(typeof(IMMPathItem), (DataTemplate)Resources["PathItemDataTemplate"]);
-            ((SgzDataTemplateSelector)ItemTemplateSelector).Templates.Add(typeof(MMCodeItem), (DataTemplate)Resources["CodeItemDataTemplate"]);
+            ((SgzDataTemplateSelector)ItemTemplateSelector).Templates.Add(typeof(MCodeItem), (DataTemplate)Resources["CodeItemDataTemplate"]);
         }
 
 

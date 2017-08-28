@@ -30,9 +30,9 @@ namespace MaxscriptManager.ViewModel
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            SimpleIoc.Default.Register<MMMainVM>();
-            SimpleIoc.Default.Register<MMDataVM>();
-            SimpleIoc.Default.Register<MMDescriptionVM>();
+            SimpleIoc.Default.Register<MMainVM>();
+            SimpleIoc.Default.Register<MDataVM>();
+            SimpleIoc.Default.Register<MDescriptionVM>();
 
         }
 
@@ -41,9 +41,9 @@ namespace MaxscriptManager.ViewModel
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public MMMainVM Main => ServiceLocator.Current.GetInstance<MMMainVM>();
-        public MMDataVM Data => ServiceLocator.Current.GetInstance<MMDataVM>();
-        public MMDescriptionVM Description => ServiceLocator.Current.GetInstance<MMDescriptionVM>();
+        public MMainVM Main => ServiceLocator.Current.GetInstance<MMainVM>();
+        public MDataVM Data => ServiceLocator.Current.GetInstance<MDataVM>();
+        public MDescriptionVM Description => ServiceLocator.Current.GetInstance<MDescriptionVM>();
 
         /// <summary>
         /// Cleans up all the resources.

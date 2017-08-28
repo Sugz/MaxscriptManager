@@ -6,7 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:sgz="clr-namespace:SugzTools.Controls;assembly=SugzTools"
 			 xmlns:ignore="http://www.galasoft.ch/ignore"
-             StartupUri="MMView.xaml"
+             StartupUri="MView.xaml"
              mc:Ignorable="d ignore">
 
     <Application.Resources>
@@ -23,13 +23,14 @@
             <!-- Dark Panel Color -->
             <SolidColorBrush x:Key="DarkPanelColor" Color="#FF282828" />
 
-
+            
             <!-- GridSplitterTemplate -->
             <Style x:Key="GridSplitterStyle" TargetType="{x:Type GridSplitter}">
-                <Setter Property="Background" Value="{StaticResource DarkPanelColor}" />
+                <Setter Property="Background" Value="Transparent" />
                 <Setter Property="Opacity" Value="0" />
-                <Setter Property="HorizontalAlignment" Value="Stretch" />
-                <Setter Property="Width" Value="7" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="Width" Value="6" />
+                <Setter Property="Margin" Value="0,0,-3,0" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type GridSplitter}">
@@ -37,7 +38,7 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-                <Style.Triggers>
+                <!--<Style.Triggers>
                     <EventTrigger RoutedEvent="Control.MouseEnter">
                         <BeginStoryboard>
                             <Storyboard>
@@ -52,7 +53,7 @@
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>
-                </Style.Triggers>
+                </Style.Triggers>-->
             </Style>
 
 
@@ -128,6 +129,7 @@
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Cursor" Value="Arrow" />
                 <Setter Property="TextAlignment" Value="Left" />
+                <Setter Property="Foreground" Value="{DynamicResource MaxFocusBorder}" />
             </Style>
 
             <Style x:Key="ParagraphStyle" TargetType="{x:Type Paragraph}">

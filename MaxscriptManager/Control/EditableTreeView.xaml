@@ -75,8 +75,8 @@
 
                     <!-- Set the grid tooltip -->
                     <DataTrigger Binding="{Binding IsValidPath}" Value="False">
-                        <Setter TargetName="grid" Property="ToolTip" Value="{x:Static src:MMConstants.InvalidPath }" />
-                        <Setter TargetName="grid" Property="ToolTip" Value="{x:Static src:MMConstants.InvalidPath }" />
+                        <Setter TargetName="grid" Property="ToolTip" Value="{x:Static src:MConstants.InvalidPath }" />
+                        <Setter TargetName="grid" Property="ToolTip" Value="{x:Static src:MConstants.InvalidPath }" />
                     </DataTrigger>
 
                 </HierarchicalDataTemplate.Triggers>
@@ -268,24 +268,15 @@
 
 
             <!-- Item Container Style -->
-            <Style x:Key="TreeViewItemStyle"
-                   TargetType="{x:Type TreeViewItem}">
-                <Setter Property="Background"
-                        Value="Transparent" />
-                <Setter Property="Padding"
-                        Value="1,0,0,0" />
-                <Setter Property="Foreground"
-                        Value="{DynamicResource MaxText}" />
-                <Setter Property="HorizontalContentAlignment"
-                        Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
-                <Setter Property="VerticalContentAlignment"
-                        Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
-                <Setter Property="FocusVisualStyle"
-                        Value="{StaticResource TreeViewItemFocusVisual}" />
-                <Setter Property="IsSelected"
-                        Value="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <Setter Property="IsExpanded"
-                        Value="{Binding IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Padding" Value="1,0,0,0" />
+                <Setter Property="Foreground" Value="{DynamicResource MaxText}" />
+                <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}" />
+                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <!--<Setter Property="Template" Value="{DynamicResource SgzTreeViewItemFullRowSelectionTemplate}" />-->
 
                 <Setter Property="Template">
@@ -330,60 +321,40 @@
                             </Grid>
 
                             <ControlTemplate.Triggers>
-                                <Trigger Property="IsExpanded"
-                                         Value="false">
-                                    <Setter TargetName="ItemsHost"
-                                            Property="Visibility"
-                                            Value="Collapsed" />
+                                <Trigger Property="IsExpanded" Value="false">
+                                    <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed" />
                                 </Trigger>
 
-                                <Trigger Property="HasItems"
-                                         Value="false">
-                                    <Setter TargetName="Expander"
-                                            Property="Visibility"
-                                            Value="Hidden" />
+                                <Trigger Property="HasItems" Value="false">
+                                    <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
                                 </Trigger>
 
-                                <Trigger Property="IsEnabled"
-                                         Value="false">
-                                    <Setter Property="Foreground"
-                                            Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                                 </Trigger>
 
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
-                                        <Condition Property="IsMouseOver"
-                                                   Value="True" />
-                                        <Condition Property="IsSelected"
-                                                   Value="True" />
+                                        <Condition Property="IsMouseOver" Value="True" />
+                                        <Condition Property="IsSelected" Value="True" />
                                     </MultiTrigger.Conditions>
-                                    <Setter TargetName="Bd"
-                                            Property="Background"
-                                            Value="{DynamicResource MaxBlue}" />
+                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource MaxBlue}" />
                                 </MultiTrigger>
 
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
-                                        <Condition Property="IsMouseOver"
-                                                   Value="True" />
-                                        <Condition Property="IsSelected"
-                                                   Value="False" />
+                                        <Condition Property="IsMouseOver" Value="True" />
+                                        <Condition Property="IsSelected" Value="False" />
                                     </MultiTrigger.Conditions>
-                                    <Setter TargetName="Bd"
-                                            Property="Background"
-                                            Value="{DynamicResource MaxBlueMouseOver}" />
+                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource MaxBlueMouseOver}" />
                                 </MultiTrigger>
 
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
-                                        <Condition Property="IsMouseOver"
-                                                   Value="False" />
-                                        <Condition Property="IsSelected"
-                                                   Value="True" />
+                                        <Condition Property="IsMouseOver" Value="False" />
+                                        <Condition Property="IsSelected" Value="True" />
                                     </MultiTrigger.Conditions>
-                                    <Setter TargetName="Bd"
-                                            Property="Background"
-                                            Value="{DynamicResource MaxBlue}" />
+                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource MaxBlue}" />
                                 </MultiTrigger>
                             </ControlTemplate.Triggers>
 
@@ -392,8 +363,7 @@
                 </Setter>
 
                 <Style.Triggers>
-                    <Trigger Property="VirtualizingPanel.IsVirtualizing"
-                             Value="true">
+                    <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="true">
                         <Setter Property="ItemsPanel">
                             <Setter.Value>
                                 <ItemsPanelTemplate>
@@ -414,11 +384,11 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TreeView}">
                             <Border x:Name="Bd"
+                                    Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     SnapsToDevicePixels="true">
                                 <ScrollViewer x:Name="TV_ScrollViewer"
-                                              Background="{TemplateBinding Background}"
                                               CanContentScroll="false"
                                               Focusable="false"
                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"

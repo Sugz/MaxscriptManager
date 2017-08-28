@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace MaxscriptManager.Src
 {
-    public class MMSelectedItemMessage
+    public class MSelectedItemMessage
     {
-        public MMDataItem NewItem { get; protected set; }
-        public MMSelectedItemMessage(MMDataItem item)
+        public MDataItem NewItem { get; protected set; }
+        public MSelectedItemMessage(MDataItem item)
         {
             NewItem = item;
         }

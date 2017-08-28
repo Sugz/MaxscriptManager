@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MaxscriptManager.Model
 {
-    public class MMScript : MMCodeItem, IMMPathItem
+    public class MScript : MCodeItem, IMMPathItem
     {
 
         #region Fields
@@ -62,7 +62,7 @@ namespace MaxscriptManager.Model
         #region Constructors
 
 
-        public MMScript(object parent, string path) : base(parent)
+        public MScript(object parent, string path) : base(parent)
         {
             Path = path;
         }
@@ -75,13 +75,13 @@ namespace MaxscriptManager.Model
         /// Get all the script code, then get the desciprtion and children
         /// </summary>
         /// <returns></returns>
-        protected override ObservableCollection<MMDataItem> GetChildren()
+        protected override ObservableCollection<MDataItem> GetChildren()
         {
             if (!IsValidPath)
                 return null;
 
             StringCollection code = new StringCollection();
-            ObservableCollection<MMDataItem> children = new ObservableCollection<MMDataItem>();
+            ObservableCollection<MDataItem> children = new ObservableCollection<MDataItem>();
             StreamReader streamReader = new StreamReader(Path, Encoding.GetEncoding("iso-8859-1"));
             PeekableStreamReaderAdapter peekStreamReader = new PeekableStreamReaderAdapter(streamReader);
             while (!streamReader.EndOfStream)
@@ -122,7 +122,7 @@ namespace MaxscriptManager.Model
                         if (openCount != 0 && closeCount == openCount)
                             break;
                     }
-                    children.Add(new MMCodeItem(this, text, type, childCode));
+                    children.Add(new MCodeItem(this, text, type, childCode));
                 }
 
                 else
