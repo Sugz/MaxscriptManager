@@ -17,15 +17,28 @@ namespace MaxscriptManager.Src
     public static class MParser
     {
 
-        private static TextBlock FormatStandardCode(string s)
+        private static Run FormatStandardCode(string s)
         {
-            TextBlock run = new TextBlock() { Text = s, TextWrapping = TextWrapping.NoWrap };
+            Run run = new Run(s);
             if (MConstants.ClassDef.Concat(MConstants.BlueWords).Contains(s.ToLower()))
-                run.Foreground = new SolidColorBrush(Colors.CornflowerBlue);
-            else if (s.StartsWith("\"") && s.EndsWith("\""))
-                run.Foreground = new SolidColorBrush(Colors.Pink);
+                run.Foreground = Resource<SolidColorBrush>.GetColor("BlueText");
+            else if (MConstants.LightBlueWords.Contains(s.ToLower()))
+                run.Foreground = Resource<SolidColorBrush>.GetColor("LightBlueText");
+            else if (float.TryParse(s, out float result))
+                run.Foreground = Resource<SolidColorBrush>.GetColor("OrangeText");
+            else if (s.StartsWith("#"))
+                run.Foreground = Resource<SolidColorBrush>.GetColor("PinkText");
             return run;
         }
+
+
+        private static Run FormatString(string s)
+        {
+            Run run = new Run(s);
+            run.Foreground = Resource<SolidColorBrush>.GetColor("StringColor");
+            return run;
+        }
+
 
         private static TextBlock FormatCommentary(string s)
         {
@@ -38,47 +51,47 @@ namespace MaxscriptManager.Src
         public static void FormatCode(StringCollection code, ref FlowDocument document)
         {
             bool isCommentary = false;
-            for (int i = 0; i < code.Count; i++)
+            bool isString = false;
+            foreach ( string line in code)
             {
                 Paragraph paragraph = new Paragraph();
-                string line = code[i];
 
-                string[] splitters = { "\t" };
-                string[] lineSplit = line.SplitAndKeep(MConstants.ComDelimiters.Concat(splitters).ToArray()).ToArray();
-                if (lineSplit.Length == 1)
-                {
-                    if (isCommentary)
-                        paragraph.Inlines.Add(FormatCommentary(line));
-                    else
-                        line.SplitAndKeep(' ').ForEach(x => paragraph.Inlines.Add(FormatStandardCode(x)));
-                        //paragraph.Inlines.Add(FormatStandardCode(line));
-                }
-                    
-
-                else if (lineSplit.Length > 1)
+                // Line contain strings or commentary
+                string[] delims = MConstants.ComDelimiters.Concat(new string[] { "\"" }).ToArray();
+                if (delims.Any(x => line.Contains(x)) || isString || isCommentary)
                 {
                     bool singleLine = false;
-                    foreach (string linePart in lineSplit)
+                    foreach (string str in line.SplitAndKeep(delims))
                     {
-                        // Start or end of commentary
-                        if (Array.FindIndex(MConstants.ComDelimiters, x => linePart == x) is int comIndex && comIndex != -1)
+                        // Begining or end of commentary
+                        if (Array.FindIndex(MConstants.ComDelimiters, x => str == x) is int comIndex && comIndex != -1)
                         {
                             isCommentary = (comIndex != 2);
                             singleLine = (comIndex == 0);
-                            paragraph.Inlines.Add(FormatCommentary(linePart));
+                            paragraph.Inlines.Add(FormatCommentary(str));
                         }
                         // Currently in commentary
                         else if (isCommentary)
-                            paragraph.Inlines.Add(FormatCommentary(linePart));
-                        // standard code
+                            paragraph.Inlines.Add(FormatCommentary(str));
+                        // Begining or end of string
+                        else if (str == "\"")
+                        {
+                            isString = !isString;
+                            paragraph.Inlines.Add(FormatString(str));
+                        }
+                        // Currently in string
+                        else if (isString)
+                            paragraph.Inlines.Add(FormatString(str));
+                        // Standard code
                         else
-                            linePart.SplitAndKeep(' ').ForEach(x => paragraph.Inlines.Add(FormatStandardCode(x)));
-                            //paragraph.Inlines.Add(new Run(linePart));
+                            str.SplitAndKeep("\t ".ToCharArray()).ForEach(x => paragraph.Inlines.Add(FormatStandardCode(x)));
                     }
-                    // Stop commentary formating if the commentary started with --
                     if (singleLine)
                         isCommentary = false;
                 }
+                // Standard code
+                else
+                    line.SplitAndKeep("\t ".ToCharArray()).ForEach(x => paragraph.Inlines.Add(FormatStandardCode(x)));
 
                 document.Blocks.Add(paragraph);
             }
