@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaxscriptManager.Control"
+        xmlns:src="clr-namespace:MaxscriptManager.Src"
         xmlns:sgz="clr-namespace:SugzTools.Controls;assembly=SugzTools"
         xmlns:c="clr-namespace:SugzTools.Converters;assembly=SugzTools"
         xmlns:ignore="http://www.galasoft.ch/ignore"
@@ -95,22 +96,24 @@
                        Height="30"
                        LastChildFill="False"
                        Background="{DynamicResource MaxButtonMouseOver}">
-                <sgz:SgzCheckButton Content="DESCRIPTION"
+                <sgz:SgzFlatCheckButton Content="DESCRIPTION"
                                         IsChecked="{Binding Description.ShowCode, Converter={StaticResource InvertBool}, Source={StaticResource Locator}}"
                                         DockPanel.Dock="Left"
                                         VerticalAlignment="Stretch"
                                         Height="Auto"
                                         Width="100"
                                         Margin="0,2,0,0"
+                                        PartCheckDock="Top"
                                         Background="{DynamicResource MaxButtonMouseOver}"
                                         CheckedBrush="{DynamicResource DarkPanelColor}" />
-                <sgz:SgzCheckButton Content="CODE"
+                <sgz:SgzFlatCheckButton Content="CODE"
                                         IsChecked="{Binding Description.ShowCode, Source={StaticResource Locator}}"
                                         DockPanel.Dock="Left"
                                         VerticalAlignment="Stretch"
                                         Height="Auto"
                                         Width="100"
                                         Margin="0,2,0,0"
+                                        PartCheckDock="Top"
                                         Background="{DynamicResource MaxButtonMouseOver}"
                                         CheckedBrush="{DynamicResource DarkPanelColor}" />
                 <sgz:SgzCheckBox Content="EDIT"
@@ -121,10 +124,9 @@
                                  HorizontalContentAlignment="Right"
                                  Spacing="10"
                                  DockPanel.Dock="Right"
-                                 VerticalAlignment="Center" 
-                                 Margin="10,0"/>
+                                 VerticalAlignment="Center"
+                                 Margin="10,0" />
             </DockPanel>
-            <TextBlock />
             <FlowDocumentScrollViewer  Foreground="{DynamicResource MaxText}"
                                        BorderThickness="0"
                                        Margin="7,0,0,0"

@@ -1,0 +1,7 @@
+*.dll
+MaxscriptManager/bin/Debug/MaxscriptManager.exe.CodeAnalysisLog.xml
+*.pdb
+*.cache
+MaxscriptManager/obj/Debug/MaxscriptManager.g.resources
+*.lref
+MaxscriptManager/obj/Debug/MView.baml
