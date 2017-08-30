@@ -88,7 +88,7 @@ namespace MaxscriptManager.ViewModel
         private void AddFolder()
         {
             if (_Browser.GetFolder() is string selectedFolder && !Datas.Any(x => x.Path.Equals(selectedFolder)))
-                Datas.Add(new MFolder(selectedFolder));
+                Datas.Add(new MFolder(selectedFolder) { IsSelected = true });
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace MaxscriptManager.ViewModel
         private void AddFile()
         {
             if (_Browser.GetFile() is string selectedFile && !Datas.Any(x => x.Path.Equals(selectedFile)))
-                Datas.Add(new MScript(null, selectedFile));
+                Datas.Add(new MScript(null, selectedFile) { IsSelected = true });
         }
     } 
 

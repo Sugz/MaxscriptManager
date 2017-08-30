@@ -11,12 +11,10 @@ namespace MaxscriptManager.Src
         public static readonly string InvalidPath = "The path is not valid.";
         public static readonly string[] ComDelimiters = { "--", "/*", "*/" };
         public static readonly string[] ClassDef = { "struct", "rollout", "fn", "function", "attributes", "macroscript", "parameters" };
-        public static readonly string[] BlueWords = { "global", "local", "if", "then", "else", "do", "as", "and", "not", "while", "for", "to", "return", "try", "catch" };
-        public static readonly string[] LightBlueWords = { "undefined", "true", "false"  };
 
         public static readonly Dictionary<string, string[]> ParserColors = new Dictionary<string, string[]>()
         {
-            {"ControlColor", new string[] { "angle", "slider", "spinner", "button", "checkbutton", "mapbutton", "materialbutton", "pickbutton", "checkbox", "colorpicker", "listbox", "multilistbox", "dropdownlist", "combobox", "edittext", "groupBox", "hyperLink", "label", "progressbar", "radiobuttons", "bitmap", "imgTag", "SubRollout", "curvecontrol", "popUpMenu", "timer" } },
+            {"ControlText", new string[] { "angle", "slider", "spinner", "button", "checkbutton", "mapbutton", "materialbutton", "pickbutton", "checkbox", "colorpicker", "listbox", "multilistbox", "dropdownlist", "combobox", "edittext", "groupBox", "hyperLink", "label", "progressbar", "radiobuttons", "bitmap", "imgTag", "SubRollout", "curvecontrol", "popUpMenu", "timer" } },
             {"BlueText", new string[] { "case", "continue", "do", "else", "for", "if", "return", "struct", "while", "catch", "private", "public", "throw", "try", "function", "then", "with", "max", "set", "exit", "on", "attributes", "local", "and", "not", "or", "when", "to", "where", "global", "as", "in", "plugin", "off", "by", "fn", "rollout", "rcmenu", "utility", "from", "animate", "about", "at", "collect", "coordsys", "dropscript", "of", "mapped", "macroscript", "persistent", "parameters", "tool", "undo" } },
             {"LightBlueText", new string[] { "undefined", "unsupplied", "false", "true", "pi", "e", "green", "blue", "red" } },
             {"DarkBlueText", new string[] { "shape", "modifier", "system", "node", "helper", "material", "light", "filter", "camera", "colorpicker", "atmospheric", "rendereffect", "texturemap", "trackviewutility" } },

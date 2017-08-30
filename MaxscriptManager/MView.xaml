@@ -7,6 +7,7 @@
         xmlns:src="clr-namespace:MaxscriptManager.Src"
         xmlns:sgz="clr-namespace:SugzTools.Controls;assembly=SugzTools"
         xmlns:c="clr-namespace:SugzTools.Converters;assembly=SugzTools"
+        xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
         Title="SugzTools Maxscript Manager"
@@ -127,11 +128,18 @@
                                  VerticalAlignment="Center"
                                  Margin="10,0" />
             </DockPanel>
-            <FlowDocumentScrollViewer  Foreground="{DynamicResource MaxText}"
+            <avalon:TextEditor Name="textEditor"
+                               FontSize="10pt"
+                               SyntaxHighlighting="{Binding Description.SyntaxHighlighting, Source={StaticResource Locator}}"
+                               ShowLineNumbers="True"
+                               Background="{DynamicResource DarkPanelColor}"
+                               Foreground="{DynamicResource MaxText}"
+                               Document="{Binding Description.Document, Source={StaticResource Locator}}"/>
+            <!--<FlowDocumentScrollViewer  Foreground="{DynamicResource MaxText}"
                                        BorderThickness="0"
                                        Margin="7,0,0,0"
                                        ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                       Document="{Binding Description.Document, Source={StaticResource Locator}}"/>
+                                       Document="{Binding Description.Document, Source={StaticResource Locator}}"/>-->
         </DockPanel>
 
         <!-- GridSplitter -->

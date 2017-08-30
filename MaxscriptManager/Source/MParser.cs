@@ -77,25 +77,6 @@ namespace MaxscriptManager.Src
             }
         }
 
-        private static Run FormatStandardCode(string s)
-        {
-            Run run = new Run(s);
-
-            //string containing numnber
-            
-            string[] output = Regex.Matches(s, "[0-9.]+|[^0-9.]+").Cast<Match>().Select(match => match.Value).ToArray();
-
-            if (MConstants.ClassDef.Concat(MConstants.BlueWords).Contains(s.ToLower()))
-                run.Foreground = Resource<SolidColorBrush>.GetColor("BlueText");
-            else if (MConstants.LightBlueWords.Contains(s.ToLower()))
-                run.Foreground = Resource<SolidColorBrush>.GetColor("LightBlueText");
-            else if (float.TryParse(s, out float result))
-                run.Foreground = Resource<SolidColorBrush>.GetColor("OrangeText");
-            else if (s.StartsWith("#"))
-                run.Foreground = Resource<SolidColorBrush>.GetColor("PinkText");
-            return run;
-        }
-
 
         private static Run FormatString(string s)
         {

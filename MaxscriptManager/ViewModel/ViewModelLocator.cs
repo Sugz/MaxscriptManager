@@ -32,7 +32,7 @@ namespace MaxscriptManager.ViewModel
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MMainVM>();
             SimpleIoc.Default.Register<MDataVM>();
-            SimpleIoc.Default.Register<MDescriptionVM>();
+            SimpleIoc.Default.Register<MCodeVM>();
 
         }
 
@@ -43,7 +43,7 @@ namespace MaxscriptManager.ViewModel
             Justification = "This non-static member is needed for data binding purposes.")]
         public MMainVM Main => ServiceLocator.Current.GetInstance<MMainVM>();
         public MDataVM Data => ServiceLocator.Current.GetInstance<MDataVM>();
-        public MDescriptionVM Description => ServiceLocator.Current.GetInstance<MDescriptionVM>();
+        public MCodeVM Description => ServiceLocator.Current.GetInstance<MCodeVM>();
 
         /// <summary>
         /// Cleans up all the resources.

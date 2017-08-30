@@ -39,3 +39,6 @@ D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\Control\EditableTr
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\Control\EditableTreeView.baml
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\MView.g.cs
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\MView.baml
+D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\bin\Debug\ICSharpCode.AvalonEdit.dll
+D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\bin\Debug\ICSharpCode.AvalonEdit.pdb
+D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\bin\Debug\ICSharpCode.AvalonEdit.xml
