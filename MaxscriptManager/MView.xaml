@@ -129,7 +129,7 @@
                                  Margin="10,0" />
             </DockPanel>
             <avalon:TextEditor Name="textEditor"
-                               FontSize="10pt"
+                               FontSize="11pt"
                                SyntaxHighlighting="{Binding Description.SyntaxHighlighting, Source={StaticResource Locator}}"
                                ShowLineNumbers="True"
                                Background="{DynamicResource DarkPanelColor}"

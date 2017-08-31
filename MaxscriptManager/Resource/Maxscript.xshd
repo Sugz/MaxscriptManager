@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0"?>
 <SyntaxDefinition name="Maxscript" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="WhiteText" foreground="#FFC8C8C8" />
   <Color name="CommentText" foreground="#FF7D7D7D" />
   <Color name="StringText" foreground="#FFFF9999" />
   <Color name="ControlText" foreground="#FF99CC66" />
@@ -13,10 +14,11 @@
   <Color name="YellowText" foreground="#FFD9AB66" />
   <Color name="LightGreenText" foreground="#FF91CF3C" />
   <Color name="DarkGreenText" foreground="#FF54B56F" />
-  <Color name="OptionalArgsText" foreground="#FFB9B9B9" />
+  <Color name="OptionalArgsText" foreground="#FFB9B9B9" fontStyle="italic"/>
+  <Color name="RedText" foreground="#FFFF0000" />
 	
 	<!-- This is the main ruleset. -->
-	<RuleSet ignoreCase="true">
+	<RuleSet ignoreCase="true" >
 		<Span color="CommentText" begin="--" />
 		<Span color="CommentText" multiline="true" begin="/\*" end="\*/" />
 		
@@ -38,13 +40,15 @@
       )
       ([eE][+-]?[0-9]+)? # optional exponent
     </Rule>
+    
+    <Span color="PinkText" begin="#" end=" " />
+    <Span color="RedText" begin="#" end="[\s\(\{]+" />
 
-    <!--<Span color="OptionalArgsText" fontStyle="italic" begin="\.*?:" end=":"/>-->
-    <!--<RuleSet ignorecase="true" color="OptionalArgsText" fontStyle="italic">
-      <Delimiters>:</Delimiters>
-    </RuleSet>-->
+    <!--Optional arguments-->
+    <Rule color="OptionalArgsText">[\d\w_]+:</Rule>
+    
 
-    <Span color="PinkText" begin="polyop." end=" " fontStyle="italic">
+    <Span color="DarkGreenText" begin="polyop." end=" " fontStyle="italic">
       <RuleSet >
         <Keywords>
           <Word>applyuvwmap</Word>
@@ -202,7 +206,7 @@
       </RuleSet>
     </Span>
 
-    <Span color="PinkText" begin="polyops." >
+    <Span color="DarkGreenText" begin="polyops." >
       <RuleSet>
         <Keywords>
           <Word>attachlist</Word>
