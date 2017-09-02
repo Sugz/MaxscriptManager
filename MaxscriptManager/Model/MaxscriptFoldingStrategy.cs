@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Folding;
+using System.Text.RegularExpressions;
 #if NREFACTORY
 using ICSharpCode.NRefactory.Editor;
 #endif
@@ -89,6 +90,23 @@ namespace MaxscriptManager.Model
                     // don't fold if opening and closing brace are on the same line
                     if (startOffset < lastNewLineOffset)
                     {
+                        //int j = startOffset - 1;
+                        //int newLineCount = 0;
+                        //bool found = false;
+                        //while(!found)
+                        //{
+                        //    c = document.GetCharAt(j);
+                        //    if (c == '\n')
+                        //        newLineCount++;
+                        //    if (newLineCount == 2)
+                        //    {
+                        //        j = startOffset;
+                        //        break;
+                        //    }
+                        //    else if (Regex.Match(c.ToString(), @"[^\S\n\t+]").Success)
+                        //        found = true;
+                        //    j--;
+                        //}
                         newFoldings.Add(new NewFolding(startOffset, i + 1));
                     }
                 }

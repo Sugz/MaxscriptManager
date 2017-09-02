@@ -63,7 +63,7 @@
                 <Setter Property="BorderBrush" Value="{x:Null}" />
                 <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="Height" Value="40" />
-                <Setter Property="VerticalAlignment" Value="Bottom" />
+                <Setter Property="VerticalAlignment" Value="Top" />
                 <Setter Property="HorizontalContentAlignment" Value="Left" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
                 <Style.Triggers>
@@ -74,11 +74,22 @@
                 </Style.Triggers>
             </Style>
 
-            <!-- Toolbar Base Button Style -->
+            <!-- Toolbar Button Style -->
             <Style x:Key="ToolbarButtonStyle" TargetType="{x:Type sgz:SgzButton}" BasedOn="{StaticResource ToolbarBaseButtonStyle}">
                 <Setter Property="PressedBrush" Value="{StaticResource MaxBlueMouseOver}" />
                 <Setter Property="HoverBrush" Value="{StaticResource MaxButtonMouseOver}" />
                 <Setter Property="CornerRadius" Value="0" />
+                <Style.Triggers>
+                    <Trigger Property="IsPressed" Value="true">
+                        <Setter Property="Foreground" Value="White" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Toolbar CheckButton Style -->
+            <Style x:Key="ToolbarCheckButtonStyle" TargetType="{x:Type sgz:SgzFlatCheckButton}" BasedOn="{StaticResource ToolbarBaseButtonStyle}">
+                <Setter Property="CheckedBrush" Value="Transparent" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
                 <Style.Triggers>
                     <Trigger Property="IsPressed" Value="true">
                         <Setter Property="Foreground" Value="White" />

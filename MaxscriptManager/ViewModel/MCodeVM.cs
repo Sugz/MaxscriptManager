@@ -31,6 +31,9 @@ namespace MaxscriptManager.ViewModel
         //private FlowDocument _Document;                                                                     // The flowdocument 
         private TextDocument _Document = new TextDocument();
 
+        FoldingManager foldingManager;
+        MaxscriptFoldingStrategy foldingStrategy = new MaxscriptFoldingStrategy();
+
         #endregion Fields
 
 
@@ -94,6 +97,7 @@ namespace MaxscriptManager.ViewModel
             // Get selected treeview item
             MessengerInstance.Register<MSelectedItemMessage>(this, x => SelectedItem = x.NewItem);
             InitializeDocument();
+
         }
 
 
@@ -123,7 +127,7 @@ namespace MaxscriptManager.ViewModel
         /// </summary>
         private void GetDocument()
         {
-            if ((SelectedItem as MCodeItem) is MCodeItem item)
+            if ((SelectedItem as MCodeItem) is MCodeItem item && item.IsSelected)
             {
                 if (ShowCode)
                 {

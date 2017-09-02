@@ -19,7 +19,7 @@ namespace MaxscriptManager.ViewModel
         private bool _StatusPanelIsOpen = true;                                     // The status panel opening state
         private string _Status = string.Empty;                                      // The string displayed in the status panel
         private Visibility _ProgressBarVisibility = Visibility.Collapsed;           // The progressbar visibility
-
+        private bool _ShowTreeView = true;
 
         #endregion Fields
 
@@ -53,6 +53,16 @@ namespace MaxscriptManager.ViewModel
         {
             get => _ProgressBarVisibility;
             private set => Set(ref _ProgressBarVisibility, value);
+        }
+
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool ShowTreeView
+        {
+            get { return _ShowTreeView; }
+            set { Set(ref _ShowTreeView, value); }
         }
 
 

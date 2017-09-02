@@ -3423,6 +3423,11 @@
             Margin showing line numbers.
             </summary>
         </member>
+        <member name="M:ICSharpCode.AvalonEdit.Editing.LineNumberMargin.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:ICSharpCode.AvalonEdit.Editing.LineNumberMargin.typeface">
             <summary>
             The typeface used for rendering the line number margin.
@@ -4424,6 +4429,11 @@
             Gets/sets the Brush used for displaying the background of selected folding markers.
             </summary>
         </member>
+        <member name="M:ICSharpCode.AvalonEdit.Folding.FoldingMargin.#ctor">
+            <summary>
+            Create a FoldingMargin with a margin set to 0,0,5,0
+            </summary>
+        </member>
         <member name="M:ICSharpCode.AvalonEdit.Folding.FoldingMargin.MeasureOverride(System.Windows.Size)">
             <inheritdoc/>
         </member>
@@ -4437,9 +4447,6 @@
             <inheritdoc/>
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Folding.FoldingMargin.GetVisualChild(System.Int32)">
-            <inheritdoc/>
-        </member>
-        <member name="M:ICSharpCode.AvalonEdit.Folding.FoldingMargin.OnRender(System.Windows.Media.DrawingContext)">
             <inheritdoc/>
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Folding.FoldingMargin.CalculateFoldLinesForFoldingsActiveAtStart(System.Collections.Generic.List{System.Windows.Media.TextFormatting.TextLine},System.Windows.Media.Pen[],System.Windows.Media.Pen[])">

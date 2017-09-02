@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace MaxscriptManager.Model
 {
@@ -110,6 +111,8 @@ namespace MaxscriptManager.Model
 
 
         protected abstract ObservableCollection<MDataItem> GetChildren();
+
+
 
     }
 }
