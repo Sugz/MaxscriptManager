@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0"?>
 <SyntaxDefinition name="Maxscript" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
-  <Color name="WhiteText" foreground="#FFC8C8C8" />
-  <Color name="CommentText" foreground="#FF7D7D7D" />
-  <Color name="StringText" foreground="#FFFF9999" />
+  <Color name="WhiteText" foreground="#FFD2D2D2" />
+  <Color name="CommentText" foreground="#FF7D7D7D" fontStyle="italic"/>
+  <Color name="StringText" foreground="#FFEEA8A8" />
+  <Color name="DigitText" foreground="#FFF18D55" />
   <Color name="ControlText" foreground="#FF99CC66" />
-  <Color name="PinkText" foreground="#FFFF99FF" />
-  <Color name="BlueText" foreground="#FF3399FF" />
+  <Color name="PinkText" foreground="#FFF0B0F0" />
+  <Color name="BlueText" foreground="#FF3399FF"/>
   <Color name="LightBlueText" foreground="#FF99CCFF" />
   <Color name="DarkBlueText" foreground="#FF3652A8" />
   <Color name="VioletText" foreground="#FFB18AE6" />
@@ -14,14 +15,15 @@
   <Color name="YellowText" foreground="#FFD9AB66" />
   <Color name="LightGreenText" foreground="#FF91CF3C" />
   <Color name="DarkGreenText" foreground="#FF54B56F" />
-  <Color name="OptionalArgsText" foreground="#FFB9B9B9" fontStyle="italic"/>
+  <Color name="OptionalArgsText" foreground="#FFAFAFAF" fontStyle="italic"/>
   <Color name="RedText" foreground="#FFFF0000" />
 	
 	<!-- This is the main ruleset. -->
 	<RuleSet ignoreCase="true" >
 		<Span color="CommentText" begin="--" />
 		<Span color="CommentText" multiline="true" begin="/\*" end="\*/" />
-		
+
+    <!-- Strings -->
 		<Span color="StringText">
 			<Begin>"</Begin>
 			<End>"</End>
@@ -30,234 +32,32 @@
 				<Span begin="\\" end="." />
 			</RuleSet>
 		</Span>
+    <Span color="StringText">
+      <Begin>@"</Begin>
+      <End>"</End>
+      <RuleSet>
+        <!-- nested span for escape sequences -->
+        <Span begin="\\" end="." />
+      </RuleSet>
+    </Span>
 
 		<!-- Digits -->
-    <Rule foreground="#FFFF9053">
+    <Rule color="DigitText" >
       \b0[xX][0-9a-fA-F]+  # hex number
       |    \b
       (    \d+(\.[0-9]+)?   #number with optional floating point
       |    \.[0-9]+         #or just starting with floating point
       )
-      ([eE][+-]?[0-9]+)? # optional exponent
+      ([eE][+-]?[0-9]+)?    # optional exponent
     </Rule>
-    
-    <Span color="PinkText" begin="#" end=" " />
-    <Span color="RedText" begin="#" end="[\s\(\{]+" />
 
+    <!-- Sharp -->
+    <Rule color="PinkText">[#][a-zA-Z]\w*</Rule>
+    <Rule color="RedText">[#]</Rule>
+    
     <!--Optional arguments-->
-    <Rule color="OptionalArgsText">[\d\w_]+:</Rule>
-    
+    <Rule color="OptionalArgsText">[\d\w]+:</Rule>
 
-    <Span color="DarkGreenText" begin="polyop." end=" " fontStyle="italic">
-      <RuleSet >
-        <Keywords>
-          <Word>applyuvwmap</Word>
-          <Word>attach</Word>
-          <Word>autosmooth</Word>
-          <Word>bevelfaces</Word>
-          <Word>breakverts</Word>
-          <Word>capholesbyedge</Word>
-          <Word>capholesbyface</Word>
-          <Word>capholesbyvert</Word>
-          <Word>chamferedges</Word>
-          <Word>chamferverts</Word>
-          <Word>collapsedeadstructs</Word>
-          <Word>collapseedges</Word>
-          <Word>collapsefaces</Word>
-          <Word>collapseverts</Word>
-          <Word>createedge</Word>
-          <Word>createpolygon</Word>
-          <Word>createshape</Word>
-          <Word>createvert</Word>
-          <Word>cutedge</Word>
-          <Word>cutface</Word>
-          <Word>cutvert</Word>
-          <Word>defaultmapfaces</Word>
-          <Word>deleteedges</Word>
-          <Word>deletefaces</Word>
-          <Word>deleteisoverts</Word>
-          <Word>deleteverts</Word>
-          <Word>detachedges</Word>
-          <Word>detachfaces</Word>
-          <Word>detachverts</Word>
-          <Word>divideedge</Word>
-          <Word>divideface</Word>
-          <Word>extrudefaces</Word>
-          <Word>fillinmesh</Word>
-          <Word>flipnormals</Word>
-          <Word>forcesubdivision</Word>
-          <Word>freeedata</Word>
-          <Word>freevdata</Word>
-          <Word>getborderfromedge</Word>
-          <Word>getdeadedges</Word>
-          <Word>getdeadfaces</Word>
-          <Word>getdeadverts</Word>
-          <Word>getedatachannelsupport</Word>
-          <Word>getedatavalue</Word>
-          <Word>getedgefaces</Word>
-          <Word>getedgeflags</Word>
-          <Word>getedgesbyflag</Word>
-          <Word>getedgeselection</Word>
-          <Word>getedgesusingface</Word>
-          <Word>getedgesusingvert</Word>
-          <Word>getedgeverts</Word>
-          <Word>getedgevis</Word>
-          <Word>getelementsusingface</Word>
-          <Word>getfacearea</Word>
-          <Word>getfacecenter</Word>
-          <Word>getfacedeg</Word>
-          <Word>getfaceedges</Word>
-          <Word>getfaceflags</Word>
-          <Word>getfacematid</Word>
-          <Word>getfacenormal</Word>
-          <Word>getfacesbyflag</Word>
-          <Word>getfaceselection</Word>
-          <Word>getfacesmoothgroup</Word>
-          <Word>getfacesusingedge</Word>
-          <Word>getfacesusingvert</Word>
-          <Word>getfaceverts</Word>
-          <Word>gethasdeadstructs</Word>
-          <Word>gethiddenfaces</Word>
-          <Word>gethiddenverts</Word>
-          <Word>getmapface</Word>
-          <Word>getmapsupport</Word>
-          <Word>getmapvert</Word>
-          <Word>getnumedatachannels</Word>
-          <Word>getnumedges</Word>
-          <Word>getnumfaces</Word>
-          <Word>getnummapfaces</Word>
-          <Word>getnummaps</Word>
-          <Word>getnummapverts</Word>
-          <Word>getnumvdatachannels</Word>
-          <Word>getnumverts</Word>
-          <Word>getopenedges</Word>
-          <Word>getsafefacecenter</Word>
-          <Word>getsliceplane</Word>
-          <Word>getvdatachannelsupport</Word>
-          <Word>getvdatavalue</Word>
-          <Word>getvert</Word>
-          <Word>getvertflags</Word>
-          <Word>getvertsbycolor</Word>
-          <Word>getvertsbyflag</Word>
-          <Word>getvertselection</Word>
-          <Word>getvertsusedonlybyfaces</Word>
-          <Word>getvertsusingedge</Word>
-          <Word>getvertsusingface</Word>
-          <Word>insliceplanemode</Word>
-          <Word>isedgedead</Word>
-          <Word>isfacedead</Word>
-          <Word>ismeshfilledin</Word>
-          <Word>isvertdead</Word>
-          <Word>makeedgesplanar</Word>
-          <Word>makefacesplanar</Word>
-          <Word>makevertsplanar</Word>
-          <Word>meshsmoothbyedge</Word>
-          <Word>meshsmoothbyface</Word>
-          <Word>meshsmoothbyvert</Word>
-          <Word>moveedgestoplane</Word>
-          <Word>movefacestoplane</Word>
-          <Word>movevert</Word>
-          <Word>movevertstoplane</Word>
-          <Word>propagateflags</Word>
-          <Word>resetedata</Word>
-          <Word>resetsliceplane</Word>
-          <Word>resetvdata</Word>
-          <Word>retriangulate</Word>
-          <Word>setdiagonal</Word>
-          <Word>setedatachannelsupport</Word>
-          <Word>setedatavalue</Word>
-          <Word>setedgeflags</Word>
-          <Word>setedgeselection</Word>
-          <Word>setedgevis</Word>
-          <Word>setfacecolor</Word>
-          <Word>setfaceflags</Word>
-          <Word>setfacematid</Word>
-          <Word>setfaceselection</Word>
-          <Word>setfacesmoothgroup</Word>
-          <Word>sethiddenfaces</Word>
-          <Word>sethiddenverts</Word>
-          <Word>setmapface</Word>
-          <Word>setmapsupport</Word>
-          <Word>setmapvert</Word>
-          <Word>setnumedatachannels</Word>
-          <Word>setnummapfaces</Word>
-          <Word>setnummaps</Word>
-          <Word>setnummapverts</Word>
-          <Word>setnumvdatachannels</Word>
-          <Word>setsliceplane</Word>
-          <Word>setvdatachannelsupport</Word>
-          <Word>setvdatavalue</Word>
-          <Word>setvert</Word>
-          <Word>setvertcolor</Word>
-          <Word>setvertflags</Word>
-          <Word>setvertselection</Word>
-          <Word>slice</Word>
-          <Word>splitedges</Word>
-          <Word>tessellatebyedge</Word>
-          <Word>tessellatebyface</Word>
-          <Word>tessellatebyvert</Word>
-          <Word>unhideallfaces</Word>
-          <Word>unhideallverts</Word>
-          <Word>weldedges</Word>
-          <Word>weldedgesbythreshold</Word>
-          <Word>weldverts</Word>
-          <Word>weldvertsbythreshold</Word>
-        </Keywords>
-      </RuleSet>
-    </Span>
-
-    <Span color="DarkGreenText" begin="polyops." >
-      <RuleSet>
-        <Keywords>
-          <Word>attachlist</Word>
-          <Word>autosmooth</Word>
-          <Word>break</Word>
-          <Word>cap</Word>
-          <Word>clearallsg</Word>
-          <Word>collapse</Word>
-          <Word>createshapefromedges</Word>
-          <Word>delete</Word>
-          <Word>detach</Word>
-          <Word>flipnormal</Word>
-          <Word>gridalign</Word>
-          <Word>hide</Word>
-          <Word>makeplanar</Word>
-          <Word>meshsmooth</Word>
-          <Word>namedselcopy</Word>
-          <Word>namedselpaste</Word>
-          <Word>removeisolatedverts</Word>
-          <Word>resetplane</Word>
-          <Word>retriangulate</Word>
-          <Word>selectbycolor</Word>
-          <Word>selectbyid</Word>
-          <Word>selectbysg</Word>
-          <Word>slice</Word>
-          <Word>split</Word>
-          <Word>startbevel</Word>
-          <Word>startchamferedge</Word>
-          <Word>startchamfervertex</Word>
-          <Word>startcreateedge</Word>
-          <Word>startcreateface</Word>
-          <Word>startcreatevertex</Word>
-          <Word>startcutedge</Word>
-          <Word>startcutface</Word>
-          <Word>startcutvertex</Word>
-          <Word>startdivideedge</Word>
-          <Word>startdivideface</Word>
-          <Word>startedittri</Word>
-          <Word>startextrudeedge</Word>
-          <Word>startextrudeface</Word>
-          <Word>startextrudevertex</Word>
-          <Word>startsliceplane</Word>
-          <Word>startweldtarget</Word>
-          <Word>tessellate</Word>
-          <Word>unhide</Word>
-          <Word>update</Word>
-          <Word>viewalign</Word>
-          <Word>weld</Word>
-        </Keywords>
-      </RuleSet>
-    </Span>
 
     <Keywords color="ControlText">
       <Word>angle</Word>
@@ -411,22 +211,74 @@
 
 
     <Keywords color="LightRedText">
-      <Word>localtime</Word>
-      <Word>rootnode</Word>
-      <Word>rendereffects</Word>
-      <Word>escapeenable</Word>
+      <Word>activeGrid</Word>
+      <Word>ambientColor</Word>
+      <Word>ambientColorController</Word>
+      <Word>animationRange</Word>
+      <Word>animButtonEnabled</Word>
+      <Word>animButtonState</Word>
+      <Word>backgroundColor</Word>
+      <Word>backgroundColorController</Word>
+      <Word>backgroundImageFileName</Word>
+      <Word>currentMaterialLibrary</Word>
+      <Word>currentTime</Word>
+      <Word>displayGamma</Word>
+      <Word>fileInGamma</Word>
+      <Word>fileOutGamma</Word>
+      <Word>displaySafeFrames</Word>
+      <Word>editorFont</Word>
+      <Word>editorFontSize</Word>
+      <Word>editorShowPath</Word>
+      <Word>editorTabWidth</Word>
+      <Word>escapeEnable</Word>
+      <Word>environmentMap</Word>
+      <Word>flyOffTime</Word>
+      <Word>frameRate</Word>
+      <Word>globalTracks</Word>
+      <Word>hardwareLockID</Word>
+      <Word>heapFree</Word>
+      <Word>heapSize</Word>
+      <Word>hotspotAngleSeparation</Word>
+      <Word>inputTextColor</Word>
+      <Word>lightLevel</Word>
+      <Word>lightLevelController</Word>
+      <Word>lightTintColor</Word>
+      <Word>lightTintColorController</Word>
+      <Word>listener</Word>
+      <Word>localTime</Word>
+      <Word>macroRecorder</Word>
+      <Word>manipulateMode</Word>
+      <Word>maxFileName</Word>
+      <Word>maxFilePath</Word>
+      <Word>messageTextColor</Word>
+      <Word>numEffects</Word>
+      <Word>numAtmospherics</Word>
+      <Word>numSubObjectLevels</Word>
+      <Word>outputTextColor</Word>
+      <Word>playActiveOnly</Word>
+      <Word>realTimePlayback</Word>
       <Word>renderer</Word>
-      <Word>rendsimplifyarealights</Word>
-    </Keywords>
-
-
-    <Keywords color="GoldText">
-      <Word>registry</Word>
-      <Word>le</Word>
-      <Word>options</Word>
-      <Word>custattributes</Word>
-      <Word>keyboard</Word>
-      <Word>trackview</Word>
+      <Word>renderDisplacements</Word>
+      <Word>renderEffects</Word>
+      <Word>renderHeight</Word>
+      <Word>renderPixelAspect</Word>
+      <Word>renderWidth</Word>
+      <Word>rendOutputFilename</Word>
+      <Word>rendSimplifyAreaLights</Word>
+      <Word>rootNode</Word>
+      <Word>rootScene</Word>
+      <Word>sceneMaterials</Word>
+      <Word>scriptsPath</Word>
+      <Word>showEndResult</Word>
+      <Word>skipRenderedFrames</Word>
+      <Word>sliderTime</Word>
+      <Word>stackLimit</Word>
+      <Word>subObjectLevel</Word>
+      <Word>ticksPerFrame</Word>
+      <Word>timeDisplayMode</Word>
+      <Word>trackViewNodes</Word>
+      <Word>useEnvironmentMap</Word>
+      <Word>videoPostTracks</Word>
     </Keywords>
 
 
@@ -1040,6 +892,7 @@
       <Word>surface</Word>
       <Word>maxscript</Word>
     </Keywords>
+
 
     <Keywords color="DarkGreenText">
       <Word>open</Word>
@@ -3127,6 +2980,203 @@
       <Word>pluginpaths.count</Word>
       <Word>pluginpaths.get</Word>
       <Word>pointcacheman.getmemoryused</Word>
+      <Word>polyop.applyuvwmap</Word>
+      <Word>polyop.attach</Word>
+      <Word>polyop.autosmooth</Word>
+      <Word>polyop.bevelfaces</Word>
+      <Word>polyop.breakverts</Word>
+      <Word>polyop.capholesbyedge</Word>
+      <Word>polyop.capholesbyface</Word>
+      <Word>polyop.capholesbyvert</Word>
+      <Word>polyop.chamferedges</Word>
+      <Word>polyop.chamferverts</Word>
+      <Word>polyop.collapsedeadstructs</Word>
+      <Word>polyop.collapseedges</Word>
+      <Word>polyop.collapsefaces</Word>
+      <Word>polyop.collapseverts</Word>
+      <Word>polyop.createedge</Word>
+      <Word>polyop.createpolygon</Word>
+      <Word>polyop.createshape</Word>
+      <Word>polyop.createvert</Word>
+      <Word>polyop.cutedge</Word>
+      <Word>polyop.cutface</Word>
+      <Word>polyop.cutvert</Word>
+      <Word>polyop.defaultmapfaces</Word>
+      <Word>polyop.deleteedges</Word>
+      <Word>polyop.deletefaces</Word>
+      <Word>polyop.deleteisoverts</Word>
+      <Word>polyop.deleteverts</Word>
+      <Word>polyop.detachedges</Word>
+      <Word>polyop.detachfaces</Word>
+      <Word>polyop.detachverts</Word>
+      <Word>polyop.divideedge</Word>
+      <Word>polyop.divideface</Word>
+      <Word>polyop.extrudefaces</Word>
+      <Word>polyop.fillinmesh</Word>
+      <Word>polyop.flipnormals</Word>
+      <Word>polyop.forcesubdivision</Word>
+      <Word>polyop.freeedata</Word>
+      <Word>polyop.freevdata</Word>
+      <Word>polyop.getborderfromedge</Word>
+      <Word>polyop.getdeadedges</Word>
+      <Word>polyop.getdeadfaces</Word>
+      <Word>polyop.getdeadverts</Word>
+      <Word>polyop.getedatachannelsupport</Word>
+      <Word>polyop.getedatavalue</Word>
+      <Word>polyop.getedgefaces</Word>
+      <Word>polyop.getedgeflags</Word>
+      <Word>polyop.getedgesbyflag</Word>
+      <Word>polyop.getedgeselection</Word>
+      <Word>polyop.getedgesusingface</Word>
+      <Word>polyop.getedgesusingvert</Word>
+      <Word>polyop.getedgeverts</Word>
+      <Word>polyop.getedgevis</Word>
+      <Word>polyop.getelementsusingface</Word>
+      <Word>polyop.getfacearea</Word>
+      <Word>polyop.getfacecenter</Word>
+      <Word>polyop.getfacedeg</Word>
+      <Word>polyop.getfaceedges</Word>
+      <Word>polyop.getfaceflags</Word>
+      <Word>polyop.getfacematid</Word>
+      <Word>polyop.getfacenormal</Word>
+      <Word>polyop.getfacesbyflag</Word>
+      <Word>polyop.getfaceselection</Word>
+      <Word>polyop.getfacesmoothgroup</Word>
+      <Word>polyop.getfacesusingedge</Word>
+      <Word>polyop.getfacesusingvert</Word>
+      <Word>polyop.getfaceverts</Word>
+      <Word>polyop.gethasdeadstructs</Word>
+      <Word>polyop.gethiddenfaces</Word>
+      <Word>polyop.gethiddenverts</Word>
+      <Word>polyop.getmapface</Word>
+      <Word>polyop.getmapsupport</Word>
+      <Word>polyop.getmapvert</Word>
+      <Word>polyop.getnumedatachannels</Word>
+      <Word>polyop.getnumedges</Word>
+      <Word>polyop.getnumfaces</Word>
+      <Word>polyop.getnummapfaces</Word>
+      <Word>polyop.getnummaps</Word>
+      <Word>polyop.getnummapverts</Word>
+      <Word>polyop.getnumvdatachannels</Word>
+      <Word>polyop.getnumverts</Word>
+      <Word>polyop.getopenedges</Word>
+      <Word>polyop.getsafefacecenter</Word>
+      <Word>polyop.getsliceplane</Word>
+      <Word>polyop.getvdatachannelsupport</Word>
+      <Word>polyop.getvdatavalue</Word>
+      <Word>polyop.getvert</Word>
+      <Word>polyop.getvertflags</Word>
+      <Word>polyop.getvertsbycolor</Word>
+      <Word>polyop.getvertsbyflag</Word>
+      <Word>polyop.getvertselection</Word>
+      <Word>polyop.getvertsusedonlybyfaces</Word>
+      <Word>polyop.getvertsusingedge</Word>
+      <Word>polyop.getvertsusingface</Word>
+      <Word>polyop.insliceplanemode</Word>
+      <Word>polyop.isedgedead</Word>
+      <Word>polyop.isfacedead</Word>
+      <Word>polyop.ismeshfilledin</Word>
+      <Word>polyop.isvertdead</Word>
+      <Word>polyop.makeedgesplanar</Word>
+      <Word>polyop.makefacesplanar</Word>
+      <Word>polyop.makevertsplanar</Word>
+      <Word>polyop.meshsmoothbyedge</Word>
+      <Word>polyop.meshsmoothbyface</Word>
+      <Word>polyop.meshsmoothbyvert</Word>
+      <Word>polyop.moveedgestoplane</Word>
+      <Word>polyop.movefacestoplane</Word>
+      <Word>polyop.movevert</Word>
+      <Word>polyop.movevertstoplane</Word>
+      <Word>polyop.propagateflags</Word>
+      <Word>polyop.resetedata</Word>
+      <Word>polyop.resetsliceplane</Word>
+      <Word>polyop.resetvdata</Word>
+      <Word>polyop.retriangulate</Word>
+      <Word>polyop.setdiagonal</Word>
+      <Word>polyop.setedatachannelsupport</Word>
+      <Word>polyop.setedatavalue</Word>
+      <Word>polyop.setedgeflags</Word>
+      <Word>polyop.setedgeselection</Word>
+      <Word>polyop.setedgevis</Word>
+      <Word>polyop.setfacecolor</Word>
+      <Word>polyop.setfaceflags</Word>
+      <Word>polyop.setfacematid</Word>
+      <Word>polyop.setfaceselection</Word>
+      <Word>polyop.setfacesmoothgroup</Word>
+      <Word>polyop.sethiddenfaces</Word>
+      <Word>polyop.sethiddenverts</Word>
+      <Word>polyop.setmapface</Word>
+      <Word>polyop.setmapsupport</Word>
+      <Word>polyop.setmapvert</Word>
+      <Word>polyop.setnumedatachannels</Word>
+      <Word>polyop.setnummapfaces</Word>
+      <Word>polyop.setnummaps</Word>
+      <Word>polyop.setnummapverts</Word>
+      <Word>polyop.setnumvdatachannels</Word>
+      <Word>polyop.setsliceplane</Word>
+      <Word>polyop.setvdatachannelsupport</Word>
+      <Word>polyop.setvdatavalue</Word>
+      <Word>polyop.setvert</Word>
+      <Word>polyop.setvertcolor</Word>
+      <Word>polyop.setvertflags</Word>
+      <Word>polyop.setvertselection</Word>
+      <Word>polyop.slice</Word>
+      <Word>polyop.splitedges</Word>
+      <Word>polyop.tessellatebyedge</Word>
+      <Word>polyop.tessellatebyface</Word>
+      <Word>polyop.tessellatebyvert</Word>
+      <Word>polyop.unhideallfaces</Word>
+      <Word>polyop.unhideallverts</Word>
+      <Word>polyop.weldedges</Word>
+      <Word>polyop.weldedgesbythreshold</Word>
+      <Word>polyop.weldverts</Word>
+      <Word>polyop.weldvertsbythreshold</Word>
+      <Word>polyops.attachlist</Word>
+      <Word>polyops.autosmooth</Word>
+      <Word>polyops.break</Word>
+      <Word>polyops.cap</Word>
+      <Word>polyops.clearallsg</Word>
+      <Word>polyops.collapse</Word>
+      <Word>polyops.createshapefromedges</Word>
+      <Word>polyops.delete</Word>
+      <Word>polyops.detach</Word>
+      <Word>polyops.flipnormal</Word>
+      <Word>polyops.gridalign</Word>
+      <Word>polyops.hide</Word>
+      <Word>polyops.makeplanar</Word>
+      <Word>polyops.meshsmooth</Word>
+      <Word>polyops.namedselcopy</Word>
+      <Word>polyops.namedselpaste</Word>
+      <Word>polyops.removeisolatedverts</Word>
+      <Word>polyops.resetplane</Word>
+      <Word>polyops.retriangulate</Word>
+      <Word>polyops.selectbycolor</Word>
+      <Word>polyops.selectbyid</Word>
+      <Word>polyops.selectbysg</Word>
+      <Word>polyops.slice</Word>
+      <Word>polyops.split</Word>
+      <Word>polyops.startbevel</Word>
+      <Word>polyops.startchamferedge</Word>
+      <Word>polyops.startchamfervertex</Word>
+      <Word>polyops.startcreateedge</Word>
+      <Word>polyops.startcreateface</Word>
+      <Word>polyops.startcreatevertex</Word>
+      <Word>polyops.startcutedge</Word>
+      <Word>polyops.startcutface</Word>
+      <Word>polyops.startcutvertex</Word>
+      <Word>polyops.startdivideedge</Word>
+      <Word>polyops.startdivideface</Word>
+      <Word>polyops.startedittri</Word>
+      <Word>polyops.startextrudeedge</Word>
+      <Word>polyops.startextrudeface</Word>
+      <Word>polyops.startextrudevertex</Word>
+      <Word>polyops.startsliceplane</Word>
+      <Word>polyops.startweldtarget</Word>
+      <Word>polyops.tessellate</Word>
+      <Word>polyops.unhide</Word>
+      <Word>polyops.update</Word>
+      <Word>polyops.viewalign</Word>
+      <Word>polyops.weld</Word>
       <Word>refs.dependencylooptest</Word>
       <Word>refs.dependentnodes</Word>
       <Word>refs.dependents</Word>
@@ -3495,6 +3545,90 @@
       <Word>xrefs.getxreffilecount</Word>
       <Word>xrefs.updatechangedxrefs</Word>
     </Keywords>
+
+    
+    <!--GoldText-->
+    <Rule color="GoldText">
+      \b(
+      assetbrowser
+      |attachctrl
+      |biped
+      |bit
+      |boolobj
+      |cacheops
+      |callbacks
+      |camerafov
+      |crowds
+      |cui
+      |custattributes
+      |delegates
+      |dof
+      |dotnet
+      |enveffectsdialog
+      |fileproperties
+      |flexops
+      |globalmotionclipops
+      |globalvars
+      |gw
+      |hidebycategory
+      |ik
+      |ilayermanager
+      |internet
+      |le
+      |linkctrl
+      |listctrl
+      |listview
+      |logsystem
+      |macros
+      |mappaths
+      |mateditor
+      |meshop
+      |meshops
+      |mocap
+      |modpanel
+      |mtlbrowser
+      |nodeexposureinterface
+      |patch
+      |patchops
+      |pathconfig
+      |persistents
+      |pluginpaths
+      |pointcacheman
+      |polyop
+      |polyops
+      |refs
+      |registry
+      |renderscenedialog
+      |schematicview
+      |sessionpaths
+      |setkey
+      |skinops
+      |snapmode
+      |splineops
+      |surfacearrivebhvr
+      |symbolicpaths
+      |sysinfo
+      |systemtools
+      |tabbeddialogs
+      |terrainops
+      |thehold
+      |themixer
+      |toolmode
+      |trackbar
+      |trackview
+      |units
+      |vfields
+      |viewport
+      |wavsound
+      |windows
+      |xrefpaths
+      |xrefs
+      )\b(?!\S)
+    </Rule>
+    
+    <!--Class Properties-->
+    <!--<Rule color="WhiteText">[\d\w]+([.][\d\w]+)+</Rule>-->
+    <Rule color="WhiteText">([.][\d\w]+)+</Rule>
 
   </RuleSet>
 </SyntaxDefinition>
