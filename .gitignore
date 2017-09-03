@@ -7,3 +7,7 @@ MaxscriptManager/obj/Debug/MaxscriptManager.g.resources
 MaxscriptManager/obj/Debug/MView.baml
 *.exe
 MaxscriptManager/bin/Debug/MaxscriptManager.pdb
+*.dll
+*.pdb
+MaxscriptManager/bin/Debug/MaxscriptManager.exe.CodeAnalysisLog.xml
+*.exe
