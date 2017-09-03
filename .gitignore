@@ -11,3 +11,7 @@ MaxscriptManager/bin/Debug/MaxscriptManager.pdb
 *.pdb
 MaxscriptManager/bin/Debug/MaxscriptManager.exe.CodeAnalysisLog.xml
 *.exe
+*.cache
+MaxscriptManager/bin/Debug/ICSharpCode.AvalonEdit.xml
+*.cache
+*.Cache
