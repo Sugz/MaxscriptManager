@@ -118,5 +118,12 @@ namespace MaxscriptManager.Model
             newFoldings.Sort((a, b) => a.StartOffset.CompareTo(b.StartOffset));
             return newFoldings;
         }
+
+
+        public void RemoveFoldings(FoldingManager manager, TextDocument document)
+        {
+            //IEnumerable<NewFolding> newFoldings = CreateNewFoldings(document, out int firstErrorOffset);
+            manager.UpdateFoldings(new List<NewFolding>(), -1);
+        }
 	}
 }

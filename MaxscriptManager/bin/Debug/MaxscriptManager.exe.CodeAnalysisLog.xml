@@ -12,14 +12,14 @@
          <Members>
           <Member Name="#.ctor(System.Object)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-01 23:17:02Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-04 21:47:52Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MCodeItem.cs" Line="17">'MCodeItem.MCodeItem(object)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MCodeItem..ctor(Object)&#xD;&#xA;MDataItem.set_Parent(Object):Void</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#.ctor(System.Object,MaxscriptManager.Model.MMDataType)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-01 23:17:02Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-04 21:47:52Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MCodeItem.cs" Line="17">'MCodeItem.MCodeItem(object, MMDataType)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MCodeItem..ctor(Object, MMDataType)&#xD;&#xA;MDataItem.set_Parent(Object):Void</Issue>
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MCodeItem.cs" Line="17">'MCodeItem.MCodeItem(object, MMDataType)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MCodeItem..ctor(Object, MMDataType)&#xD;&#xA;MDataItem.set_Parent(Object):Void&#xD;&#xA;MDataItem.set_DataType(MMDataType):Void</Issue>
             </Message>
@@ -27,7 +27,7 @@
           </Member>
           <Member Name="#.ctor(System.Object,System.String,MaxscriptManager.Model.MMDataType)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-01 23:17:02Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-04 21:47:52Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MCodeItem.cs" Line="17">'MCodeItem.MCodeItem(object, string, MMDataType)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MCodeItem..ctor(Object, String, MMDataType)&#xD;&#xA;MDataItem.set_Parent(Object):Void</Issue>
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MCodeItem.cs" Line="17">'MCodeItem.MCodeItem(object, string, MMDataType)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MCodeItem..ctor(Object, String, MMDataType)&#xD;&#xA;MDataItem.set_Parent(Object):Void&#xD;&#xA;MDataItem.set_Text(String):Void</Issue>
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MCodeItem.cs" Line="17">'MCodeItem.MCodeItem(object, string, MMDataType)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MCodeItem..ctor(Object, String, MMDataType)&#xD;&#xA;MDataItem.set_Parent(Object):Void&#xD;&#xA;MDataItem.set_Text(String):Void&#xD;&#xA;MDataItem.set_DataType(MMDataType):Void</Issue>
@@ -36,7 +36,7 @@
           </Member>
           <Member Name="#.ctor(System.Object,System.String,MaxscriptManager.Model.MMDataType,System.Collections.Specialized.StringCollection)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-01 23:17:02Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-04 21:47:52Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MCodeItem.cs" Line="17">'MCodeItem.MCodeItem(object, string, MMDataType, StringCollection)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MCodeItem..ctor(Object, String, MMDataType, StringCollection)&#xD;&#xA;MDataItem.set_Parent(Object):Void</Issue>
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MCodeItem.cs" Line="17">'MCodeItem.MCodeItem(object, string, MMDataType, StringCollection)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MCodeItem..ctor(Object, String, MMDataType, StringCollection)&#xD;&#xA;MDataItem.set_Parent(Object):Void&#xD;&#xA;MDataItem.set_Text(String):Void</Issue>
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MCodeItem.cs" Line="17">'MCodeItem.MCodeItem(object, string, MMDataType, StringCollection)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MCodeItem..ctor(Object, String, MMDataType, StringCollection)&#xD;&#xA;MDataItem.set_Parent(Object):Void&#xD;&#xA;MDataItem.set_Text(String):Void&#xD;&#xA;MDataItem.set_DataType(MMDataType):Void</Issue>
@@ -49,7 +49,7 @@
          <Members>
           <Member Name="#.ctor(System.String,System.Collections.ObjectModel.ObservableCollection`1&lt;MaxscriptManager.Model.MDataItem&gt;)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-01 23:17:02Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-04 21:47:52Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MFolder.cs" Line="63">'MFolder.MFolder(string, ObservableCollection&lt;MDataItem&gt;)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MFolder..ctor(String, ObservableCollection&lt;MDataItem&gt;)&#xD;&#xA;MFolder.set_Path(String):Void&#xD;&#xA;ViewModelBase.Set&lt;T&gt;(T&amp;, T, Boolean, String):Boolean&#xD;&#xA;MDataItem.get_Children():ObservableCollection&lt;MDataItem&gt;</Issue>
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MFolder.cs" Line="63">'MFolder.MFolder(string, ObservableCollection&lt;MDataItem&gt;)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MFolder..ctor(String, ObservableCollection&lt;MDataItem&gt;)&#xD;&#xA;MFolder.set_Path(String):Void&#xD;&#xA;ViewModelBase.Set&lt;T&gt;(T&amp;, T, Boolean, String):Boolean&#xD;&#xA;MDataItem.get_Children():ObservableCollection&lt;MDataItem&gt;&#xD;&#xA;MDataItem.GetChildren():ObservableCollection&lt;MDataItem&gt;</Issue>
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MFolder.cs" Line="63">'MFolder.MFolder(string, ObservableCollection&lt;MDataItem&gt;)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MFolder..ctor(String, ObservableCollection&lt;MDataItem&gt;)&#xD;&#xA;MFolder.set_Path(String):Void&#xD;&#xA;ViewModelBase.Set&lt;T&gt;(T&amp;, T, Boolean, String):Boolean&#xD;&#xA;MDataItem.get_Children():ObservableCollection&lt;MDataItem&gt;&#xD;&#xA;MDataItem.GetChildren():ObservableCollection&lt;MDataItem&gt;&#xD;&#xA;MDataItem.set_Children(ObservableCollection&lt;MDataItem&gt;):Void</Issue>
@@ -60,7 +60,7 @@
            <Accessors>
             <Accessor Name="#get_RelativePath()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
              <Messages>
-              <Message TypeName="DoNotRaiseExceptionsInUnexpectedLocations" Category="Microsoft.Design" CheckId="CA1065" Status="Active" Created="2017-09-01 23:17:02Z" FixCategory="Breaking">
+              <Message TypeName="DoNotRaiseExceptionsInUnexpectedLocations" Category="Microsoft.Design" CheckId="CA1065" Status="Active" Created="2017-09-04 21:47:52Z" FixCategory="Breaking">
                <Issue Name="PropertyGetter" Certainty="90" Level="Warning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MFolder.cs" Line="52">'MFolder.RelativePath.get()' creates an exception of type 'NotImplementedException', an exception type that should not be raised in a property. If this exception instance might be raised, use a different exception type, convert this property into a method, or change this property's logic so that it no longer raises an exception.</Issue>
               </Message>
              </Messages>
@@ -73,7 +73,7 @@
          <Members>
           <Member Name="#.ctor(System.Object,System.String)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-01 23:17:02Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2017-09-04 21:47:52Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MScript.cs" Line="65">'MScript.MScript(object, string)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MScript..ctor(Object, String)&#xD;&#xA;MScript.set_Path(String):Void&#xD;&#xA;ViewModelBase.Set&lt;T&gt;(T&amp;, T, Boolean, String):Boolean&#xD;&#xA;MDataItem.get_Children():ObservableCollection&lt;MDataItem&gt;</Issue>
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MScript.cs" Line="65">'MScript.MScript(object, string)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MScript..ctor(Object, String)&#xD;&#xA;MScript.set_Path(String):Void&#xD;&#xA;ViewModelBase.Set&lt;T&gt;(T&amp;, T, Boolean, String):Boolean&#xD;&#xA;MDataItem.get_Children():ObservableCollection&lt;MDataItem&gt;&#xD;&#xA;MDataItem.GetChildren():ObservableCollection&lt;MDataItem&gt;</Issue>
              <Issue Certainty="95" Level="CriticalWarning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MScript.cs" Line="65">'MScript.MScript(object, string)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;MScript..ctor(Object, String)&#xD;&#xA;MScript.set_Path(String):Void&#xD;&#xA;ViewModelBase.Set&lt;T&gt;(T&amp;, T, Boolean, String):Boolean&#xD;&#xA;MDataItem.get_Children():ObservableCollection&lt;MDataItem&gt;&#xD;&#xA;MDataItem.GetChildren():ObservableCollection&lt;MDataItem&gt;&#xD;&#xA;MDataItem.set_Children(ObservableCollection&lt;MDataItem&gt;):Void</Issue>
@@ -84,7 +84,7 @@
            <Accessors>
             <Accessor Name="#get_RelativePath()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
              <Messages>
-              <Message TypeName="DoNotRaiseExceptionsInUnexpectedLocations" Category="Microsoft.Design" CheckId="CA1065" Status="Active" Created="2017-09-01 23:17:02Z" FixCategory="Breaking">
+              <Message TypeName="DoNotRaiseExceptionsInUnexpectedLocations" Category="Microsoft.Design" CheckId="CA1065" Status="Active" Created="2017-09-04 21:47:52Z" FixCategory="Breaking">
                <Issue Name="PropertyGetter" Certainty="90" Level="Warning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\Model" File="MScript.cs" Line="56">'MScript.RelativePath.get()' creates an exception of type 'NotImplementedException', an exception type that should not be raised in a property. If this exception instance might be raised, use a different exception type, convert this property into a method, or change this property's logic so that it no longer raises an exception.</Issue>
               </Message>
              </Messages>
@@ -101,7 +101,7 @@
          <Members>
           <Member Name="#InitializeDocument()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2017-09-01 23:17:02Z" FixCategory="DependsOnFix">
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2017-09-04 21:47:52Z" FixCategory="DependsOnFix">
              <Issue Certainty="75" Level="Warning" Path="D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\ViewModel" File="MCodeVM.cs" Line="119">Object 's' can be disposed more than once in method 'MCodeVM.InitializeDocument()'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 119</Issue>
             </Message>
            </Messages>

@@ -22,6 +22,7 @@ namespace MaxscriptManager.ViewModel
 
         private MDataItem _SelectedItem;
 
+
         private Visibility _DataPathFieldVisibility = Visibility.Collapsed;
 
         private RelayCommand _AddFolderCommand;
@@ -38,6 +39,13 @@ namespace MaxscriptManager.ViewModel
         /// Get the collection of DataItem that will be displayed in the treeview
         /// </summary>
         public ObservableCollection<IMMPathItem> Datas { get; set; } = new ObservableCollection<IMMPathItem>();
+
+
+        /// <summary>
+        /// Get the collection of open files
+        /// </summary>
+        public ObservableCollection<MCodeItem> OpenFiles { get; set; } = new ObservableCollection<MCodeItem>();
+
 
         /// <summary>
         /// Get the current treeview selected item

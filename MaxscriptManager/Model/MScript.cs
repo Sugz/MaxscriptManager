@@ -34,7 +34,7 @@ namespace MaxscriptManager.Model
         public override MMDataType DataType => MMDataType.Script;
         public override string Text
         {
-            get => _Text ?? (_Text = System.IO.Path.GetFileNameWithoutExtension(Path));
+            get => _Text ?? (_Text = System.IO.Path.GetFileName(Path));
             set => Set(ref _Text, value);
         }
         public bool IsValidPath

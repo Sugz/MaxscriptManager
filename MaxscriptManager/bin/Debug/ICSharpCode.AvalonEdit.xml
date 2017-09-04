@@ -3881,6 +3881,11 @@
             Gets the text view used to display text in this text area.
             </summary>
         </member>
+        <member name="P:ICSharpCode.AvalonEdit.Editing.TextArea.LeftMarginsPanel">
+            <summary>
+            Get the LeftMargin ItemsControl
+            </summary>
+        </member>
         <member name="M:ICSharpCode.AvalonEdit.Editing.TextArea.OnApplyTemplate">
             <inheritdoc/>
         </member>
@@ -4447,6 +4452,9 @@
             <inheritdoc/>
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Folding.FoldingMargin.GetVisualChild(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ICSharpCode.AvalonEdit.Folding.FoldingMargin.OnRender(System.Windows.Media.DrawingContext)">
             <inheritdoc/>
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Folding.FoldingMargin.CalculateFoldLinesForFoldingsActiveAtStart(System.Collections.Generic.List{System.Windows.Media.TextFormatting.TextLine},System.Windows.Media.Pen[],System.Windows.Media.Pen[])">

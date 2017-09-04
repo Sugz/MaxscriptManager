@@ -6,6 +6,8 @@ using System.Windows.Threading;
 using System;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Document;
+using System.Diagnostics;
+using System.Windows.Media.Animation;
 
 namespace MaxscriptManager
 {
@@ -29,9 +31,13 @@ namespace MaxscriptManager
             TextDocument document = (Application.Current.Resources["Locator"] as ViewModelLocator).Description.Document;
             foldingManager = new FoldingManager(document);
             foldingManager = FoldingManager.Install(textEditor.TextArea);
-            DispatcherTimer foldingUpdateTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(2) };
-            foldingUpdateTimer.Tick += (s, e) => foldingStrategy.UpdateFoldings(foldingManager, textEditor.Document);
-            foldingUpdateTimer.Start();
+            textEditor.MouseMove += TextEditor_MouseMove;
+        }
+
+        private void TextEditor_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (e.OriginalSource is FoldingMargin foldingMargin)
+                foldingStrategy.UpdateFoldings(foldingManager, textEditor.Document);
         }
 
         private void ShowTvBtn_Click(object sender, RoutedEventArgs e)

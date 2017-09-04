@@ -88,7 +88,13 @@
 
         <!--FlowDocumentScrollViewer-->
         <DockPanel Grid.Column="2">
-            <DockPanel DockPanel.Dock="Top"
+            <local:TabControl Background="#FF8D8D8D"
+                              Height="30"
+                              DockPanel.Dock="Top"
+                              ItemsSource="{Binding Data.OpenFiles, Source={StaticResource Locator}}">
+                <!--<local:TabControl.Style-->
+            </local:TabControl>
+            <!--<DockPanel DockPanel.Dock="Top"
                        Height="30"
                        LastChildFill="False"
                        Background="{DynamicResource MaxButtonMouseOver}">
@@ -122,7 +128,7 @@
                                  DockPanel.Dock="Right"
                                  VerticalAlignment="Center"
                                  Margin="10,0" />
-            </DockPanel>
+            </DockPanel>-->
 
             <avalon:TextEditor Name="textEditor"
                                FontSize="10pt"

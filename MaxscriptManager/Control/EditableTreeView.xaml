@@ -20,6 +20,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/SugzTools;component/Themes/MaxStyles.xaml" />
+                <ResourceDictionary Source="/SugzTools;component/Themes/FadeInOutScrollViewerStyle.xaml" />
                 <ResourceDictionary Source="/SugzTools;component/Resources/Colors.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
@@ -379,7 +380,6 @@
 
             <!-- TreeView Style -->
             <Style x:Key="TreeViewStyle" TargetType="{x:Type TreeView}">
-                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TreeView}">
@@ -394,7 +394,7 @@
                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-                                              Style="{DynamicResource ScrollViewerStyle}">
+                                              Template="{DynamicResource FadeInOutScrollViewerTemplate}">
                                     <ItemsPresenter Margin="{TemplateBinding Padding}" />
                                 </ScrollViewer>
                             </Border>
@@ -412,12 +412,6 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-                    </Trigger>
-                </Style.Triggers>
             </Style>
 
 
