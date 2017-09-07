@@ -42,3 +42,7 @@ D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\MView.baml
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\bin\Debug\ICSharpCode.AvalonEdit.dll
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\bin\Debug\ICSharpCode.AvalonEdit.pdb
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\bin\Debug\ICSharpCode.AvalonEdit.xml
+D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\Themes\Generic.baml
+D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\Control\SgzTabItem.baml
+D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\Themes\FullRowTreeview.baml
+D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\Control\SgzTabControl.baml

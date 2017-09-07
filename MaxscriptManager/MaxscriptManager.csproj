@@ -84,9 +84,14 @@
     <Compile Include="Control\EditableTreeView.xaml.cs">
       <DependentUpon>EditableTreeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\TabControl.cs" />
+    <Compile Include="Control\SgzTabControl.cs" />
+    <Compile Include="Control\SgzTabItem.cs" />
+    <Compile Include="Control\SgzTreeViewsControl.cs" />
     <Compile Include="Model\MaxscriptFoldingStrategy.cs" />
+    <Compile Include="Model\MContainerItem.cs" />
+    <Compile Include="Source\Converter\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Source\MaxscriptSynthaxCreator.cs" />
+    <Compile Include="Source\Message\MCurrentFilesMessage.cs" />
     <Compile Include="Source\Message\MSelectedItemMessage.cs" />
     <Compile Include="Model\MCodeItem.cs" />
     <Compile Include="Model\MDataItem.cs" />
@@ -103,6 +108,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Control\SgzTabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\SgzTabItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -115,6 +128,14 @@
       <DependentUpon>MView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\FullRowTreeview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -147,9 +168,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Themes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resource\MaxscriptManager.ico" />
   </ItemGroup>

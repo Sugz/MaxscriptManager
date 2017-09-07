@@ -28,59 +28,15 @@
             <c:LeftMarginMultiplierConverter x:Key="LeftMarginMultiplier" />
             <c:InvertableBooleanToVisibilityConverter x:Key="VisToBool" />
 
-            <!-- MMPathItem DataTemplate -->
-            <HierarchicalDataTemplate x:Key="PathItemDataTemplate" ItemsSource="{Binding Children}">
-                <Grid x:Name="grid" 
-                      Height="22"
-                      Background="Transparent">
-
-                    <!-- Normal state -->
-                    <TextBlock x:Name="textBlock"
-                               Text="{Binding Text, Mode=TwoWay}"
-                               Margin="3,0,0,2"
-                               MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
-                               VerticalAlignment="Center"
-                               Foreground="{DynamicResource MaxText}"
-                               HorizontalAlignment="Left" />
-
-                    <!-- This state is active in the edit mode -->
-                    <TextBox x:Name="textBox"
-                             Cursor="IBeam"
-                             Visibility="Collapsed"
-                             Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             LostFocus="TextBox_LostFocus"
-                             IsVisibleChanged="TextBox_IsVisibleChanged"
-                             KeyDown="TextBox_KeyDown"
-                             SelectionBrush="{DynamicResource MaxBlue}"
-                             HorizontalAlignment="Left" />
-
-                    <Border Width="2"
-                            Background="{DynamicResource MaxRed}"
-                            HorizontalAlignment="Right"
-                            Visibility="{Binding IsValidPath,Converter={StaticResource VisToBool}, ConverterParameter=Inverted}" />
-                </Grid>
-
-                <!-- With triggers we switch between the three states of the header depending on its focused property and the control-level property "IsInEditMode" -->
-                <HierarchicalDataTemplate.Triggers>
-                    <MultiDataTrigger>
-                        <!-- Selected, editing is generally active - the text box is displayed -->
-                        <MultiDataTrigger.Conditions>
-                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}}"
-                                       Value="True" />
-                            <Condition Binding="{Binding IsInEditMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:EditableTreeView}}}"
-                                       Value="True" />
-                        </MultiDataTrigger.Conditions>
-                        <Setter TargetName="textBlock" Property="Visibility" Value="Collapsed" />
-                        <Setter TargetName="textBox" Property="Visibility" Value="Visible" />
-                    </MultiDataTrigger>
-
-                    <!-- Set the grid tooltip -->
-                    <DataTrigger Binding="{Binding IsValidPath}" Value="False">
-                        <Setter TargetName="grid" Property="ToolTip" Value="{x:Static src:MConstants.InvalidPath }" />
-                        <Setter TargetName="grid" Property="ToolTip" Value="{x:Static src:MConstants.InvalidPath }" />
-                    </DataTrigger>
-
-                </HierarchicalDataTemplate.Triggers>
+            <!-- CDFileItem DataTemplate -->
+            <HierarchicalDataTemplate x:Key="ContainerDataTemplate" ItemsSource="{Binding Children}">
+                <TextBlock Background="#FF6A6A6A"
+                           Height="22"
+                           Padding="3,2,0,0"
+                           VerticalAlignment="Stretch"
+                           Foreground="{DynamicResource MaxText}"
+                           HorizontalAlignment="Stretch"
+                           Text="{Binding Text, Mode=TwoWay}" />
             </HierarchicalDataTemplate>
 
             <!-- CDFileItem DataTemplate -->

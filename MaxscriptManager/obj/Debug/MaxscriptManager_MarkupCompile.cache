@@ -10,11 +10,11 @@ none
 false
 CODE_ANALYSIS;DEBUG;TRACE
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\App.xaml
-22021678906
+6-17270504
 
-21-84466096
+26-474551643
 74935328063
-Control\EditableTreeView.xaml;MView.xaml;
+Control\EditableTreeView.xaml;Control\SgzTabControl.xaml;Control\SgzTabItem.xaml;MView.xaml;Themes\FullRowTreeview.xaml;Themes\Generic.xaml;
 
-False
+True
 

@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace MaxscriptManager.Model
 {
-    public class MFolder : MDataItem, IMMPathItem
+    public class MFolder : MDataItem, IMPathItem
     {
+
+        private class DummyChild : MDataItem
+        {
+            protected override ObservableCollection<MDataItem> GetChildren() => null;
+        }
 
         #region Fields
 
@@ -26,7 +31,7 @@ namespace MaxscriptManager.Model
         #region Properties
 
 
-        public override MMDataType DataType => MMDataType.Folder;
+        public override MDataType DataType => MDataType.Folder;
         public override object Parent => null;
         public override string Text
         {
@@ -50,37 +55,57 @@ namespace MaxscriptManager.Model
             }
         }
         public string RelativePath => throw new NotImplementedException();
-        //public override ObservableCollection<MMDataItem> Children
+        //public override bool IsSelected
         //{
-        //    get => base.Children ?? (base.Children = GetChildren());
-        //    set => base.Children = value;
+        //    get => _IsSelected;
+        //    set => Set(ref _IsSelected, value);
         //}
-
+        public override bool IsExpanded
+        {
+            get => _IsExpanded;
+            set
+            {
+                Set(ref _IsExpanded, value);
+                if (value && _Children.Count == 1 && _Children[0] is DummyChild)
+                {
+                    Children.Clear();
+                    foreach (string dir in Directory.GetDirectories(Path))
+                        Children.Add(new MFolder(dir));
+                    foreach (string file in Directory.GetFiles(Path))
+                        Children.Add(new MScript(this, file));
+                }
+            }
+        }
+        public override ObservableCollection<MDataItem> Children
+        {
+            get => _Children;
+            set => _Children = value;
+        }
 
         #endregion Properties
 
 
-        public MFolder(string path, ObservableCollection<MDataItem> children = null)
+        public MFolder(string path)
         {
             Path = path;
-            if (children != null)
-                Children = children;
+            if (HasSubItem())
+                Children = new ObservableCollection<MDataItem>() { new DummyChild() };
         }
 
 
-
-
-        protected override ObservableCollection<MDataItem> GetChildren()
+        private bool HasSubItem()
         {
-            if (!IsValidPath)
-                return null;
-
-            ObservableCollection<MDataItem> children = new ObservableCollection<MDataItem>();
-            //Directory.GetFiles(Path).ForEach(x => children.Add(new MMScript(this, x)));
-            foreach(string file in Directory.GetFiles(Path))
-                children.Add(new MScript(this, file));
-            return children;
-
+            DirectoryInfo directory = new DirectoryInfo(Path);
+            if (directory.GetDirectories().Length != 0 || directory.GetFiles().Length != 0)
+                return true;
+            return false;
         }
+
+
+        protected override ObservableCollection<MDataItem> GetChildren() => null;
     }
+
+
+
 }
+ 

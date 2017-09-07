@@ -2,6 +2,7 @@
 // https://www.codeproject.com/Articles/893068/WPF-TreeView-with-in-place-editing
 
 using MaxscriptManager.Model;
+using MaxscriptManager.Src;
 using SugzTools.Controls;
 using System;
 using System.ComponentModel;
@@ -77,7 +78,8 @@ namespace MaxscriptManager.Control
         private void SetDataTemplates()
         {
             ItemTemplateSelector = new SgzDataTemplateSelector();
-            ((SgzDataTemplateSelector)ItemTemplateSelector).Templates.Add(typeof(IMMPathItem), (DataTemplate)Resources["PathItemDataTemplate"]);
+            ((SgzDataTemplateSelector)ItemTemplateSelector).Templates.Add(typeof(MContainerItem), (DataTemplate)Resources["ContainerDataTemplate"]);
+            //((SgzDataTemplateSelector)ItemTemplateSelector).Templates.Add(typeof(IMPathItem), (DataTemplate)Resources["PathItemDataTemplate"]);
             ((SgzDataTemplateSelector)ItemTemplateSelector).Templates.Add(typeof(MCodeItem), (DataTemplate)Resources["CodeItemDataTemplate"]);
         }
 

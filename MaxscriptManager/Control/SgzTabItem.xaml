@@ -1,0 +1,74 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:MaxscriptManager.Control"
+                    xmlns:controls="clr-namespace:SugzTools.Controls;assembly=SugzTools">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/SugzTools;component/Resources/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type local:SgzTabItem}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkPanelColor}" />
+        <Setter Property="BorderThickness" Value="0,0,1,0" />
+        <Setter Property="IsSelected" Value="{Binding IsActive, Mode=TwoWay}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SgzTabItem}">
+                    <Border x:Name="bd" 
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid x:Name="grid" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Rectangle x:Name="PART_Hover"
+                                       Fill="White"
+                                       Opacity="0"
+                                       Grid.ColumnSpan="2" />
+                            <Rectangle x:Name="rect"
+                                       Fill="Transparent"
+                                       Height="2"
+                                       VerticalAlignment="Top"
+                                       Grid.ColumnSpan="2" />
+                            <ContentPresenter />
+                            <controls:SgzIcon x:Name="CloseButton"
+                                              Icon="MdiClose"
+                                              KeyboardNavigation.IsTabStop="False"
+                                              Grid.Column="1"
+                                              Command="{x:Static local:SgzTabItem.CloseTabCommand}"
+                                              Margin="0,3,5,0"
+                                              Background="Transparent"
+                                              Foreground="{DynamicResource MaxCaretBrush}"
+                                              HoverBrush="White"
+                                              PressedBrush="White"
+                                              Width="20"
+                                              Height="17"
+                                              Padding="3,4,8,4"
+                                              Visibility="Hidden" />
+                        </Grid>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="bd" Property="Background" Value="{DynamicResource DarkPanelColor}"/>
+                            <Setter TargetName="rect" Property="Fill" Value="{DynamicResource MaxBlue}"/>
+                            <Setter TargetName="CloseButton" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsSelected" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Hover" Property="Opacity" Value="0.1"/>
+                            <Setter TargetName="CloseButton" Property="Visibility" Value="Visible"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

@@ -16,6 +16,7 @@ namespace MaxscriptManager.Model
 
         protected readonly string[] _ClassDef = { "struct", "rollout", "fn", "function", "attributes", "macroscript", "parameters" };
         protected readonly string[] _ComDelimiters = { "/*", "*/", "--" };
+        private bool _IsActive;
 
         #endregion Fields
 
@@ -23,8 +24,35 @@ namespace MaxscriptManager.Model
         #region Properties
 
         public StringCollection Description { get; protected set; }
-        public StringCollection Code { get; protected set; }
+        public string Code { get; set; }
 
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsActive
+        {
+            get => _IsActive;
+            set
+            {
+                Set(ref _IsActive, value);
+                if (value && !_IsSelected)
+                    IsSelected = true;
+                else if (!value && _IsSelected)
+                    IsSelected = false;
+            }
+        }
+
+        public override bool IsSelected
+        {
+            get => base.IsSelected;
+            set
+            {
+                base.IsSelected = value;
+                if (value)
+                    IsActive = true;
+            }
+        }
 
         #endregion Properties
 
@@ -32,22 +60,26 @@ namespace MaxscriptManager.Model
         #region Constructors
 
 
+        public MCodeItem()
+        {
+
+        }
         public MCodeItem(object parent)
         {
             Parent = parent;
         }
-        public MCodeItem(object parent, MMDataType type )
+        public MCodeItem(object parent, MDataType type )
         {
             Parent = parent;
             DataType = type;
         }
-        public MCodeItem(object parent, string text, MMDataType type)
+        public MCodeItem(object parent, string text, MDataType type)
         {
             Parent = parent;
             Text = text;
             DataType = type;
         }
-        public MCodeItem(object parent, string text, MMDataType type, StringCollection code)
+        public MCodeItem(object parent, string text, MDataType type, string code)
         {
             Parent = parent;
             Text = text;
@@ -64,71 +96,7 @@ namespace MaxscriptManager.Model
 
 
 
-        protected override ObservableCollection<MDataItem> GetChildren()
-        {
-            ObservableCollection<MDataItem> children = new ObservableCollection<MDataItem>();
-            //for (int i = 0; i < Code.Count; i++)
-            //{
-            //    string line = Code[i].TrimStart('\t');
-
-            //    //Read line and check if it has comment => check what before the comments
-            //    //Escape until the comment end
-            //    string[] lineParts = line.SplitAndKeep(_ComDelimiters).ToArray();
-            //    if (_ComDelimiters.Any(x => lineParts[0].Contains(x)))
-            //    {
-
-            //    }
-
-            //    if (Array.FindIndex(_ClassDef, x => line.Contains(x)) is int index && index != -1)
-            //    {
-            //        // struct
-            //        if (index == 0)
-            //        {
-                        
-            //        }
-            //        // rollout
-            //        else if (index == 1)
-            //        {
-
-            //        }
-            //        // function
-            //        else
-            //        {
-
-            //        }
-            //    }
-            //}
-
-
-            //for (int i = 1; i < Code.Count; i++)
-            //{ 
-            //    string line = Code[i];
-            //    line = line.TrimStart().ToLower();
-            //    if (Array.FindIndex(_ClassDef, x => line.Contains(x)) is int index && index != -1)
-            //    {
-            //        MMDataType type = MMDataType.Struct;
-            //        if (index == 1) type = MMDataType.Rollout;
-            //        if (index == 2 || index == 3) type = MMDataType.Function;
-
-
-
-            //        StringCollection childCode = new StringCollection();
-            //        int openCount = 0, closeCount = 0;
-
-            //        for (int j = i; j < Code.Count; j++)
-            //        {
-            //            line = Code[j];
-            //            childCode.Add(line);
-            //            openCount += line.Count(x => x == '(');
-            //            closeCount += line.Count(x => x == ')');
-            //            if (openCount != 0 && closeCount == openCount)
-            //                break;
-            //        }
-            //        children.Add(new MMCodeItem(this, line.Trim("\t".ToCharArray()), type, childCode));
-            //    }
-            //}
-            return children;
-        }
+        protected override ObservableCollection<MDataItem> GetChildren() => null;
 
 
         #endregion Methods

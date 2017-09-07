@@ -47,3 +47,4 @@ MaxscriptManager/obj/Debug/Control/EditableTreeView.baml
 MaxscriptManager/obj/Debug/Control/EditableTreeView.g.cs
 MaxscriptManager/obj/Debug/Control/EditableTreeView.g.i.cs
 *.cache
+*.lref

@@ -10,8 +10,9 @@ using System.Windows.Controls;
 
 namespace MaxscriptManager.Model
 {
-    public enum MMDataType
+    public enum MDataType
     {
+        Container,
         Folder,
         Script,
         Struct,
@@ -20,7 +21,7 @@ namespace MaxscriptManager.Model
     }
 
 
-    public interface IMMPathItem
+    public interface IMPathItem
     {
         /// <summary>
         /// Get if the given path exist
@@ -46,8 +47,8 @@ namespace MaxscriptManager.Model
 
         protected string _Text;
         protected ObservableCollection<MDataItem> _Children;
-        private bool _IsSelected = false;
-        private bool _IsExpanded;
+        protected bool _IsSelected = false;
+        protected bool _IsExpanded;
 
 
         #endregion Fields
@@ -58,7 +59,7 @@ namespace MaxscriptManager.Model
         /// <summary>
         /// Get the type of DataItem
         /// </summary>
-        public virtual MMDataType DataType { get; protected set; }
+        public virtual MDataType DataType { get; set; }
 
         /// <summary>
         /// The treeviewitem parent node
@@ -86,20 +87,21 @@ namespace MaxscriptManager.Model
         /// <summary>
         /// Get or set the treeviewitem selected state 
         /// </summary>
-        public bool IsSelected
+        public virtual bool IsSelected
         {
             get => _IsSelected;
             set
             {
                 Set(ref _IsSelected, value);
-                MessengerInstance.Send(new MSelectedItemMessage(this));
+                if (value)
+                    MessengerInstance.Send(new MSelectedItemMessage(this));
             }
         }
 
         /// <summary>
         /// Get or set the treeviewitem expanded state 
         /// </summary>
-        public bool IsExpanded
+        public virtual bool IsExpanded
         {
             get => _IsExpanded;
             set => Set(ref _IsExpanded, value);

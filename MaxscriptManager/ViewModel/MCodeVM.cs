@@ -1,13 +1,17 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
+using MaxscriptManager.Control;
 using MaxscriptManager.Model;
 using MaxscriptManager.Src;
 using SugzTools.Extensions;
+using SugzTools.Src;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
@@ -25,19 +29,19 @@ namespace MaxscriptManager.ViewModel
 
         #region Fields
 
-
+        private Browser _Browser = new Browser();
         private bool _ShowCode = true;
         private MDataItem _SelectedItem;                                                                   // Treeview selected item
         //private FlowDocument _Document;                                                                     // The flowdocument 
         private TextDocument _Document = new TextDocument();
-
-        FoldingManager foldingManager;
-        MaxscriptFoldingStrategy foldingStrategy = new MaxscriptFoldingStrategy();
+        private Visibility _EditorPanelVisibility = Visibility.Collapsed;
 
         #endregion Fields
 
 
         #region Properties
+
+        public IHighlightingDefinition SyntaxHighlighting { get; private set; }
 
 
         /// <summary>
@@ -52,8 +56,6 @@ namespace MaxscriptManager.ViewModel
                 GetDocument();
             }
         }
-
-
 
         /// <summary>
         /// Treeview selected item. Set the flowdocument when updated
@@ -83,7 +85,14 @@ namespace MaxscriptManager.ViewModel
         }
 
 
-        public IHighlightingDefinition SyntaxHighlighting { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Visibility EditorPanelVisibility
+        {
+            get { return _EditorPanelVisibility; }
+            set { Set(ref _EditorPanelVisibility, value); }
+        }
 
 
         #endregion Properties
@@ -97,7 +106,6 @@ namespace MaxscriptManager.ViewModel
             // Get selected treeview item
             MessengerInstance.Register<MSelectedItemMessage>(this, x => SelectedItem = x.NewItem);
             InitializeDocument();
-
         }
 
 
@@ -127,8 +135,9 @@ namespace MaxscriptManager.ViewModel
         /// </summary>
         private void GetDocument()
         {
-            if ((SelectedItem as MCodeItem) is MCodeItem item && item.IsSelected)
+            if ((SelectedItem as MCodeItem) is MCodeItem item && item.IsActive)
             {
+                EditorPanelVisibility = Visibility.Visible;
                 if (ShowCode)
                 {
                     string code = string.Empty;
@@ -136,7 +145,12 @@ namespace MaxscriptManager.ViewModel
                     Document.Text = code;
                 }
             }
-            
+            //else if (CurrentFiles.Count == 0)
+            //{
+            //    EditorPanelVisibility = Visibility.Collapsed;
+            //    Document.Text = string.Empty;
+            //}
         }
+
     }
 }
