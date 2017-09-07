@@ -31,10 +31,12 @@ namespace MaxscriptManager.ViewModel
         #region Fields
 
         private Browser _Browser = new Browser();
+
+        
         private bool _ShowCode = true;
         private MDataItem _SelectedItem;                                                                    // Treeview selected item
         //private FlowDocument _Document;                                                                   // The flowdocument 
-        private TextDocument _Document = new TextDocument();
+        //private TextDocument _Document = new TextDocument();
         private string _Code;
         private int _CaretOffset;
         private Vector _ScrollOffset;
@@ -159,9 +161,7 @@ namespace MaxscriptManager.ViewModel
 
 
 
-        /// <summary>
-        /// Create the flowdocument and apply the styles
-        /// </summary>
+        
         private void InitializeDocument()
         {
             using (Stream s = typeof(MCodeVM).Assembly.GetManifestResourceStream("MaxscriptManager.Resource.Maxscript.xshd"))
@@ -181,16 +181,12 @@ namespace MaxscriptManager.ViewModel
         /// </summary>
         private void GetDocument()
         {
-            if ((SelectedItem as MCodeItem) is MCodeItem item)
+            if ((SelectedItem as MCodeItem) is MCodeItem item && !item.CodeLoaded)
             {
                 EditorPanelVisibility = Visibility.Visible;
                 if (ShowCode)
                 {
-                    // Store the different values before changing the code as texteditor  changed theses values when changing the text
-                    int itemCaretOffset = item.CaretOffset;
                     Code = item.Code;
-                    CaretOffset = itemCaretOffset;
-                    ScrollOffset = item.ScrollOffset;
                 }
             }
         }

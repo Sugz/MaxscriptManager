@@ -10,59 +10,51 @@ using System.Windows;
 
 namespace MaxscriptManager.Control
 {
-    public class MvvmTextEditor : TextEditor//, INotifyPropertyChanged
+    public class MvvmTextEditor : TextEditor
     {
-        #region INotifyPropertyChanged
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        #endregion INotifyPropertyChanged
+        
 
 
-        /// <summary>
-        /// A bindable Text property
-        /// </summary>
-        public new string Text
+
+        public string DocumentText
         {
-            get => base.Text;
-            set
-            {
-                base.Text = value;
-                OnPropertyChanged();
-            }
+            get => (string)GetValue(DocumentTextProperty);
+            set => SetValue(DocumentTextProperty, value);
         }
-
-
-        /// <summary>
-        /// The bindable text property dependency property
-        /// </summary>
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-            "Text", 
-            typeof(string), 
+        public static readonly DependencyProperty DocumentTextProperty = DependencyProperty.Register(
+            "DocumentText",
+            typeof(string),
             typeof(MvvmTextEditor),
-            new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, PropertyChangedCallback)
+            new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, TextChangedCallback)
         );
 
 
-        protected override void OnTextChanged(EventArgs e)
+        public MvvmTextEditor()
         {
-            Text = Document.Text;
-            base.OnTextChanged(e);
+            TextChanged += MvvmTextEditor_TextChanged;
         }
 
 
-        private static void PropertyChangedCallback(DependencyObject s, DependencyPropertyChangedEventArgs e)
+        private void MvvmTextEditor_TextChanged(object sender, EventArgs e)
         {
-            MvvmTextEditor editor = s as MvvmTextEditor;
-            if (editor.Document != null)
+            if (sender is TextEditor textEditor && textEditor.Document != null)
             {
-                int caretOffset = editor.CaretOffset;
-                editor.Document.Text = e.NewValue.ToString();
-                editor.CaretOffset = caretOffset;
+                DocumentText = textEditor.Document.Text;
             }
         }
 
+
+
+        private static void TextChangedCallback(DependencyObject s, DependencyPropertyChangedEventArgs e)
+        {
+            if (s is TextEditor editor && editor.Document != null)
+            {
+                int caretOffset = editor.CaretOffset;
+                editor.Document.Text = e.NewValue.ToString();
+                editor.CaretOffset = editor.Document.Text.Length >= caretOffset ? caretOffset : 0;
+
+            }
+        }
     }
 }

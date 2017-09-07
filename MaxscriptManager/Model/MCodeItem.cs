@@ -28,7 +28,10 @@ namespace MaxscriptManager.Model
 
 
         public StringCollection Description { get; protected set; }
-        
+
+
+        public bool CodeLoaded { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

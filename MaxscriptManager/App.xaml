@@ -4,9 +4,12 @@
              xmlns:vm="clr-namespace:MaxscriptManager.ViewModel"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:MaxscriptManager.Control"
              xmlns:src="clr-namespace:MaxscriptManager.Src"
              xmlns:sgz="clr-namespace:SugzTools.Controls;assembly=SugzTools"
              xmlns:c="clr-namespace:SugzTools.Converters;assembly=SugzTools"
+             xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:ignore="http://www.galasoft.ch/ignore"
              StartupUri="MView.xaml"
              mc:Ignorable="d ignore">
@@ -416,6 +419,20 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style>
+            
+            
+            <!-- TextEditor -->
+            <Style x:Key="TextEditorStyle" TargetType="{x:Type local:MvvmTextEditor}">
+                <Setter Property="DocumentText" Value="{Binding Description.Code, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="FontSize" Value="10pt" />
+                <Setter Property="SyntaxHighlighting" Value="{Binding Description.SyntaxHighlighting, Source={StaticResource Locator}}" />
+                <Setter Property="ShowLineNumbers" Value="True" />
+                <Setter Property="Foreground" Value="#FFD2D2D2" />
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+                <Setter Property="Visibility" Value="{Binding Description.EditorPanelVisibility, Source={StaticResource Locator}}" />
             </Style>
 
 

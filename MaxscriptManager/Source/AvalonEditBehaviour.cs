@@ -36,7 +36,6 @@ namespace MaxscriptManager.Src
             get => (Vector)GetValue(ScrollOffsetProperty);
             set => SetValue(ScrollOffsetProperty, value);
         }
-
         // DependencyProperty as the backing store for ScrollOffset
         public static readonly DependencyProperty ScrollOffsetProperty = DependencyProperty.Register(
             "ScrollOffset",

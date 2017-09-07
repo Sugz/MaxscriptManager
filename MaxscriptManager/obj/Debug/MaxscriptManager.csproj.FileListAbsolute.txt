@@ -46,4 +46,5 @@ D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\MaxscriptManager.P
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\MaxscriptManager.csproj.GenerateResource.Cache
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\MaxscriptManager.exe
 D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\MaxscriptManager.pdb
-D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\Control\SgzTextEditor.baml
+D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\Control\SgzTextEditorItem.baml
+D:\Travail\GitHub\MaxscriptManager\MaxscriptManager\obj\Debug\Control\SgzTextEditorsControl.baml

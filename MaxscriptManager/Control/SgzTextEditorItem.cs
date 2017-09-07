@@ -1,7 +1,9 @@
 ﻿using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Folding;
+using ICSharpCode.AvalonEdit.Highlighting;
 using MaxscriptManager.Model;
+using MaxscriptManager.Src;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,43 +11,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Interactivity;
 
 namespace MaxscriptManager.Control
 {
-    public class SgzTextEditor : TabItem
+    public class SgzTextEditorItem : TabItem
     {
-        TextEditor textEditor;
+        MvvmTextEditor textEditor = new MvvmTextEditor();
         FoldingManager foldingManager;
         MaxscriptFoldingStrategy foldingStrategy = new MaxscriptFoldingStrategy();
+        TextDocument textDocument = new TextDocument();
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string DocumentText
+        static SgzTextEditorItem()
         {
-            get => (string)GetValue(DocumentTextProperty);
-            set => SetValue(DocumentTextProperty, value);
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(SgzTextEditorItem), new FrameworkPropertyMetadata(typeof(SgzTextEditorItem)));
         }
-
-        // DependencyProperty as the backing store for DocumentText
-        public static readonly DependencyProperty DocumentTextProperty = DependencyProperty.Register(
-            "DocumentText",
-            typeof(string),
-            typeof(SgzTextEditor),
-            new PropertyMetadata(default(string))
-        );
-
-
-        static SgzTextEditor()
+        public SgzTextEditorItem()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(SgzTextEditor), new FrameworkPropertyMetadata(typeof(SgzTextEditor)));
-        }
-        public SgzTextEditor()
-        {
-            textEditor = Content as TextEditor;
+            Content = textEditor;
+            textEditor.Style = Application.Current.Resources["TextEditorStyle"] as Style;
             textEditor.MouseMove += TextEditor_MouseMove;
-            foldingManager = new FoldingManager(new TextDocument());
+            foldingManager = new FoldingManager(textDocument);
             foldingManager = FoldingManager.Install(textEditor.TextArea);
         }
 
@@ -60,15 +48,6 @@ namespace MaxscriptManager.Control
             if (e.OriginalSource is FoldingMargin foldingMargin)
                 foldingStrategy.UpdateFoldings(foldingManager, textEditor.Document);
         }
-
-
-        
-
-
-
-
-
-
 
     }
 }
