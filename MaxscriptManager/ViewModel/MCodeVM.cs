@@ -95,41 +95,12 @@ namespace MaxscriptManager.ViewModel
                 if ((SelectedItem as MCodeItem) is MCodeItem item && item.Code != value)
                 {
                     item.CodeChanged = true;
-                    item.Code = value;
+                    //item.Code = value;
                 }
             }
         }
 
 
-        /// <summary>
-        /// Get or set selected item caret offset
-        /// </summary>
-        public int CaretOffset
-        {
-            get => _CaretOffset;
-            set
-            {
-                Set(ref _CaretOffset, value);
-                if ((SelectedItem as MCodeItem) is MCodeItem item && item.CaretOffset != value)
-                    item.CaretOffset = value;
-            }
-        }
-
-
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Vector ScrollOffset
-        {
-            get => _ScrollOffset;
-            set
-            {
-                Set(ref _ScrollOffset, value);
-                if ((SelectedItem as MCodeItem) is MCodeItem item && item.ScrollOffset != value)
-                    item.ScrollOffset = value;
-            }
-        }
 
 
 
@@ -181,12 +152,13 @@ namespace MaxscriptManager.ViewModel
         /// </summary>
         private void GetDocument()
         {
-            if ((SelectedItem as MCodeItem) is MCodeItem item && !item.CodeLoaded)
+            if ((SelectedItem as MCodeItem) is MCodeItem item)
             {
                 EditorPanelVisibility = Visibility.Visible;
                 if (ShowCode)
                 {
                     Code = item.Code;
+                    //item.CodeLoaded = true;
                 }
             }
         }

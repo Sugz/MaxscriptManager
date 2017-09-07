@@ -337,3 +337,5 @@ MaxscriptManager/bin/Debug/*.g.resources
 MaxscriptManager/bin/Debug/*.pdb
 MaxscriptManager/bin/Debug/*.g.cs
 MaxscriptManager/bin/Debug/*.g.i.cs
+*.cs
+MaxscriptManager/obj/Debug/App.g.cs

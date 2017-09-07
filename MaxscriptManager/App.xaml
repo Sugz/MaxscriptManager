@@ -424,7 +424,7 @@
             
             <!-- TextEditor -->
             <Style x:Key="TextEditorStyle" TargetType="{x:Type local:MvvmTextEditor}">
-                <Setter Property="DocumentText" Value="{Binding Description.Code, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Setter Property="DocumentText" Value="{Binding Description.Code, Source={StaticResource Locator}, Mode=OneWay}" />
                 <Setter Property="FontFamily" Value="Consolas" />
                 <Setter Property="FontSize" Value="10pt" />
                 <Setter Property="SyntaxHighlighting" Value="{Binding Description.SyntaxHighlighting, Source={StaticResource Locator}}" />

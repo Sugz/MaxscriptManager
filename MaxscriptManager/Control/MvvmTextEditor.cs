@@ -46,6 +46,7 @@ namespace MaxscriptManager.Control
 
 
 
+
         private static void TextChangedCallback(DependencyObject s, DependencyPropertyChangedEventArgs e)
         {
             if (s is TextEditor editor && editor.Document != null)

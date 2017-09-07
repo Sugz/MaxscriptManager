@@ -109,9 +109,39 @@
 
 
         <!-- Editor -->
-        <local:SgzTextEditorsControl Grid.Column="2"
-                                     Background="Transparent"
-                                     ItemsSource="{Binding Data.CurrentFiles, Source={StaticResource Locator}}" />
+        <DockPanel Grid.Column="2">
+            <local:SgzTabControl Background="{DynamicResource MaxButtonMouseOver}"
+                                 Height="30"
+                                 DockPanel.Dock="Top"
+                                 ItemsSource="{Binding Data.CurrentFiles, Source={StaticResource Locator}}"
+                                 AddTabCommand="{Binding Data.CreateFileCommand, Source={StaticResource Locator}}"
+                                 CloseTabCommand="{Binding Data.RemoveOpenFileCommand, Source={StaticResource Locator}}">
+                <local:SgzTabControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type model:MCodeItem}">
+                        <TextBlock Text="{Binding Text}"
+                                   Margin="10,0"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource MaxText}"
+                                   Background="Transparent" />
+                    </DataTemplate>
+                </local:SgzTabControl.ItemTemplate>
+            </local:SgzTabControl>
+            <avalon:TextEditor x:Name="textEditor"
+                               FontFamily="Consolas"
+                               FontSize="10pt"
+                               SyntaxHighlighting="{Binding Description.SyntaxHighlighting, Source={StaticResource Locator}}"
+                               ShowLineNumbers="True"
+                               Foreground="#FFD2D2D2"
+                               ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                               ScrollViewer.VerticalScrollBarVisibility="Auto"
+                               Visibility="{Binding Description.EditorPanelVisibility, Source={StaticResource Locator}}">
+                <i:Interaction.Behaviors>
+                    <src:AvalonEditBehaviour DocumentText="{Binding Description.Code, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             CaretOffset="{Binding Description.CaretOffset, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             ScrollOffset="{Binding Description.ScrollOffset, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </i:Interaction.Behaviors>
+            </avalon:TextEditor>
+        </DockPanel>
 
 
         <!-- GridSplitter -->
