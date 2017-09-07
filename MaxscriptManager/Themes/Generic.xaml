@@ -4,6 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/MaxscriptManager;component/Control/SgzTabControl.xaml" />
         <ResourceDictionary Source="/MaxscriptManager;component/Control/SgzTabItem.xaml" />
+        <ResourceDictionary Source="/MaxscriptManager;component/Control/SgzTextEditor.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

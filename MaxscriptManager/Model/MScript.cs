@@ -16,7 +16,6 @@ namespace MaxscriptManager.Model
 
         #region Fields
 
-
         private bool _IsValidPath;
         private string _Path;
 
@@ -79,6 +78,26 @@ namespace MaxscriptManager.Model
         #endregion Constructors
 
 
-        
+        /// <summary>
+        /// Get all the script code, then get the desciprtion and children
+        /// </summary>
+        /// <returns></returns>
+        protected override ObservableCollection<MDataItem> GetChildren()
+        {
+            if (!IsValidPath)
+                return null;
+
+            StringBuilder code = new StringBuilder();
+            StreamReader streamReader = new StreamReader(Path, Encoding.GetEncoding("iso-8859-1"));
+            while (!streamReader.EndOfStream)
+            {
+                string line = streamReader.ReadLine();
+                code.AppendLine(line);
+            }
+
+            Code = code.ToString();
+            streamReader.Close();
+            return new ObservableCollection<MDataItem>();
+        }
     }
 }

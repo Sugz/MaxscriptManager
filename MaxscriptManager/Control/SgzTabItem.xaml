@@ -7,11 +7,44 @@
         <ResourceDictionary Source="/SugzTools;component/Resources/Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+
+    <Style x:Key="CloseTabButtonStyle" TargetType="{x:Type controls:SgzIcon}">
+        <Setter Property="Icon" Value="MdiClose"/>
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource MaxCaretBrush}" />
+        <Setter Property="HoverBrush" Value="White" />
+        <Setter Property="PressedBrush" Value="White" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="17" />
+        <Setter Property="Margin" Value="0,3,5,0" />
+        <Setter Property="Padding" Value="3,4,8,4" />
+        <Setter Property="Visibility" Value="Hidden" />
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding HasChanged, RelativeSource={RelativeSource AncestorType={x:Type local:SgzTabItem}}}" Value="True" />
+                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="False" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Icon" Value="MdiCheckboxBlankCircle" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding HasChanged, RelativeSource={RelativeSource AncestorType={x:Type local:SgzTabItem}}}" Value="True" />
+                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Icon" Value="MdiClose" />
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <Style TargetType="{x:Type local:SgzTabItem}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource DarkPanelColor}" />
         <Setter Property="BorderThickness" Value="0,0,1,0" />
         <Setter Property="IsSelected" Value="{Binding IsActive, Mode=TwoWay}"/>
+        <Setter Property="HasChanged" Value="{Binding CodeChanged, Mode=TwoWay}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:SgzTabItem}">
@@ -35,28 +68,22 @@
                                        Grid.ColumnSpan="2" />
                             <ContentPresenter />
                             <controls:SgzIcon x:Name="CloseButton"
-                                              Icon="MdiClose"
-                                              KeyboardNavigation.IsTabStop="False"
-                                              Grid.Column="1"
                                               Command="{x:Static local:SgzTabItem.CloseTabCommand}"
-                                              Margin="0,3,5,0"
-                                              Background="Transparent"
-                                              Foreground="{DynamicResource MaxCaretBrush}"
-                                              HoverBrush="White"
-                                              PressedBrush="White"
-                                              Width="20"
-                                              Height="17"
-                                              Padding="3,4,8,4"
-                                              Visibility="Hidden" />
+                                              Style="{StaticResource CloseTabButtonStyle}"/>
                         </Grid>
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
+                        <Trigger Property="HasChanged" Value="True">
+                            <Setter TargetName="CloseButton" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="bd" Property="Background" Value="{DynamicResource DarkPanelColor}"/>
                             <Setter TargetName="rect" Property="Fill" Value="{DynamicResource MaxBlue}"/>
                             <Setter TargetName="CloseButton" Property="Visibility" Value="Visible"/>
                         </Trigger>
+                        
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />

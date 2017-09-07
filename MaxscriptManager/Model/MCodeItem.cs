@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MaxscriptManager.Model
 {
@@ -14,8 +15,10 @@ namespace MaxscriptManager.Model
 
         #region Fields
 
-        protected readonly string[] _ClassDef = { "struct", "rollout", "fn", "function", "attributes", "macroscript", "parameters" };
-        protected readonly string[] _ComDelimiters = { "/*", "*/", "--" };
+        private string _Code;
+        private bool _CodeChanged = false;
+        private int _CaretOffset = 0;
+        private Vector _ScrollOffset;
         private bool _IsActive;
 
         #endregion Fields
@@ -23,12 +26,51 @@ namespace MaxscriptManager.Model
 
         #region Properties
 
-        public StringCollection Description { get; protected set; }
-        public string Code { get; set; }
 
+        public StringCollection Description { get; protected set; }
         
         /// <summary>
         /// 
+        /// </summary>
+        public string Code
+        {
+            get => _Code;
+            set => Set(ref _Code, value);
+        }
+
+        
+        /// <summary>
+        /// Get or set if the code has changed
+        /// </summary>
+        public bool CodeChanged
+        {
+            get => _CodeChanged;
+            set => Set(ref _CodeChanged, value);
+        }
+
+        
+        /// <summary>
+        /// Get or set the editor caret position
+        /// </summary>
+        public int CaretOffset
+        {
+            get => _CaretOffset;
+            set => Set(ref _CaretOffset, value);
+        }
+
+
+        /// <summary>
+        /// Get or set the editor scroll offset
+        /// </summary>
+        public Vector ScrollOffset
+        {
+            get => _ScrollOffset;
+            set => Set(ref _ScrollOffset, value);
+        }
+
+
+        /// <summary>
+        /// Get or set if this is the active item in the editor, the tabs and the current treeview
         /// </summary>
         public bool IsActive
         {
@@ -43,6 +85,9 @@ namespace MaxscriptManager.Model
             }
         }
 
+        /// <summary>
+        /// Get or set if this is the selected item in the treeviews except the current
+        /// </summary>
         public override bool IsSelected
         {
             get => base.IsSelected;
@@ -53,6 +98,7 @@ namespace MaxscriptManager.Model
                     IsActive = true;
             }
         }
+
 
         #endregion Properties
 
@@ -92,8 +138,6 @@ namespace MaxscriptManager.Model
 
 
         #region Methods
-
-
 
 
         protected override ObservableCollection<MDataItem> GetChildren() => null;

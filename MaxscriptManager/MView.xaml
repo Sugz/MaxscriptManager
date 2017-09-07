@@ -9,6 +9,7 @@
         xmlns:sgz="clr-namespace:SugzTools.Controls;assembly=SugzTools"
         xmlns:c="clr-namespace:SugzTools.Converters;assembly=SugzTools"
         xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
         Title="SugzTools Maxscript Manager"
@@ -125,15 +126,21 @@
                     </DataTemplate>
                 </local:SgzTabControl.ItemTemplate>
             </local:SgzTabControl>
-            <avalon:TextEditor Name="textEditor"
+            <avalon:TextEditor x:Name="textEditor"
+                               FontFamily="Consolas"
                                FontSize="10pt"
                                SyntaxHighlighting="{Binding Description.SyntaxHighlighting, Source={StaticResource Locator}}"
                                ShowLineNumbers="True"
                                Foreground="#FFD2D2D2"
-                               Document="{Binding Description.Document, Source={StaticResource Locator}}"
                                ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                ScrollViewer.VerticalScrollBarVisibility="Auto"
-                               Visibility="{Binding Description.EditorPanelVisibility, Source={StaticResource Locator}}" />
+                               Visibility="{Binding Description.EditorPanelVisibility, Source={StaticResource Locator}}">
+                <i:Interaction.Behaviors>
+                    <src:AvalonEditBehaviour DocumentText="{Binding Description.Code, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             CaretOffset="{Binding Description.CaretOffset, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             ScrollOffset="{Binding Description.ScrollOffset, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </i:Interaction.Behaviors>
+            </avalon:TextEditor>
             <!--<FlowDocumentScrollViewer  Foreground="{DynamicResource MaxText}"
                                        BorderThickness="0"
                                        Margin="7,0,0,0"

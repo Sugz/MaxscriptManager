@@ -24,6 +24,7 @@ using System.Xml;
 
 namespace MaxscriptManager.ViewModel
 {
+    //TODO: switch selected item to MCodeItem
     public class MCodeVM : ViewModelBase
     {
 
@@ -31,9 +32,13 @@ namespace MaxscriptManager.ViewModel
 
         private Browser _Browser = new Browser();
         private bool _ShowCode = true;
-        private MDataItem _SelectedItem;                                                                   // Treeview selected item
-        //private FlowDocument _Document;                                                                     // The flowdocument 
+        private MDataItem _SelectedItem;                                                                    // Treeview selected item
+        //private FlowDocument _Document;                                                                   // The flowdocument 
         private TextDocument _Document = new TextDocument();
+        private string _Code;
+        private int _CaretOffset;
+        private Vector _ScrollOffset;
+
         private Visibility _EditorPanelVisibility = Visibility.Collapsed;
 
         #endregion Fields
@@ -75,14 +80,55 @@ namespace MaxscriptManager.ViewModel
             }
         }
 
+
         /// <summary>
-        /// The flowdocument used to binding  
+        /// Get or set selected item code
         /// </summary>
-        public TextDocument Document
+        public string Code
         {
-            get => _Document;
-            set => Set(ref _Document, value);
+            get => _Code;
+            set
+            {
+                Set(ref _Code, value);
+                if ((SelectedItem as MCodeItem) is MCodeItem item && item.Code != value)
+                {
+                    item.CodeChanged = true;
+                    item.Code = value;
+                }
+            }
         }
+
+
+        /// <summary>
+        /// Get or set selected item caret offset
+        /// </summary>
+        public int CaretOffset
+        {
+            get => _CaretOffset;
+            set
+            {
+                Set(ref _CaretOffset, value);
+                if ((SelectedItem as MCodeItem) is MCodeItem item && item.CaretOffset != value)
+                    item.CaretOffset = value;
+            }
+        }
+
+
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector ScrollOffset
+        {
+            get => _ScrollOffset;
+            set
+            {
+                Set(ref _ScrollOffset, value);
+                if ((SelectedItem as MCodeItem) is MCodeItem item && item.ScrollOffset != value)
+                    item.ScrollOffset = value;
+            }
+        }
+
 
 
         /// <summary>
@@ -135,21 +181,18 @@ namespace MaxscriptManager.ViewModel
         /// </summary>
         private void GetDocument()
         {
-            if ((SelectedItem as MCodeItem) is MCodeItem item && item.IsActive)
+            if ((SelectedItem as MCodeItem) is MCodeItem item)
             {
                 EditorPanelVisibility = Visibility.Visible;
                 if (ShowCode)
                 {
-                    string code = string.Empty;
-                    item.Code.ForEach(x => code += $"{x}\n");
-                    Document.Text = code;
+                    // Store the different values before changing the code as texteditor  changed theses values when changing the text
+                    int itemCaretOffset = item.CaretOffset;
+                    Code = item.Code;
+                    CaretOffset = itemCaretOffset;
+                    ScrollOffset = item.ScrollOffset;
                 }
             }
-            //else if (CurrentFiles.Count == 0)
-            //{
-            //    EditorPanelVisibility = Visibility.Collapsed;
-            //    Document.Text = string.Empty;
-            //}
         }
 
     }

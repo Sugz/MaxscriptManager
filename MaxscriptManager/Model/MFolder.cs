@@ -55,11 +55,6 @@ namespace MaxscriptManager.Model
             }
         }
         public string RelativePath => throw new NotImplementedException();
-        //public override bool IsSelected
-        //{
-        //    get => _IsSelected;
-        //    set => Set(ref _IsSelected, value);
-        //}
         public override bool IsExpanded
         {
             get => _IsExpanded;
@@ -69,10 +64,11 @@ namespace MaxscriptManager.Model
                 if (value && _Children.Count == 1 && _Children[0] is DummyChild)
                 {
                     Children.Clear();
-                    foreach (string dir in Directory.GetDirectories(Path))
-                        Children.Add(new MFolder(dir));
-                    foreach (string file in Directory.GetFiles(Path))
-                        Children.Add(new MScript(this, file));
+                    DirectoryInfo folder = new DirectoryInfo(Path);
+                    foreach (DirectoryInfo dir in folder.EnumerateDirectories())
+                        Children.Add(new MFolder(dir.FullName));
+                    foreach(FileInfo file in folder.EnumerateFiles().Where(x => x.Extension == ".ms" || x.Extension == ".mcr"))
+                        Children.Add(new MScript(this, file.FullName));
                 }
             }
         }

@@ -47,6 +47,27 @@ namespace MaxscriptManager.Control
         public static RoutedUICommand CloseTabCommand => closeTabCommand;
 
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool HasChanged
+        {
+            get { return (bool)GetValue(HasChangedProperty); }
+            set { SetValue(HasChangedProperty, value); }
+        }
+
+        // DependencyProperty as the backing store for HasChanged
+        public static readonly DependencyProperty HasChangedProperty = DependencyProperty.Register(
+            "HasChanged",
+            typeof(bool),
+            typeof(SgzTabItem),
+            new PropertyMetadata(false)
+        );
+
+
+
+
         static SgzTabItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SgzTabItem), new FrameworkPropertyMetadata(typeof(SgzTabItem)));

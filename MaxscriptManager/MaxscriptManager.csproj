@@ -84,11 +84,13 @@
     <Compile Include="Control\EditableTreeView.xaml.cs">
       <DependentUpon>EditableTreeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\MvvmTextEditor.cs" />
     <Compile Include="Control\SgzTabControl.cs" />
     <Compile Include="Control\SgzTabItem.cs" />
-    <Compile Include="Control\SgzTreeViewsControl.cs" />
+    <Compile Include="Control\SgzTextEditor.cs" />
     <Compile Include="Model\MaxscriptFoldingStrategy.cs" />
     <Compile Include="Model\MContainerItem.cs" />
+    <Compile Include="Source\AvalonEditBehaviour.cs" />
     <Compile Include="Source\Converter\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Source\MaxscriptSynthaxCreator.cs" />
     <Compile Include="Source\Message\MCurrentFilesMessage.cs" />
@@ -113,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\SgzTabItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\SgzTextEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
