@@ -1,6 +1,9 @@
 ﻿using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
+using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Rendering;
+using SugzTools.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,6 +17,9 @@ namespace MaxscriptManager.Src
 {
     public sealed class AvalonEditBehaviour : Behavior<TextEditor>
     {
+
+        private FoldingManager foldingManager;
+        private UndoStack _UndoStack;
 
         #region Dependency Properties
 
@@ -43,6 +49,28 @@ namespace MaxscriptManager.Src
             typeof(AvalonEditBehaviour),
             new FrameworkPropertyMetadata(default(Vector), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ScrollOffsetCallback)
         );
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<FoldingSection> FoldingSections
+        {
+            get => (IEnumerable<FoldingSection>)GetValue(FoldingSectionsProperty);
+            set => SetValue(FoldingSectionsProperty, value);
+        }
+
+        // DependencyProperty as the backing store for FoldingSection
+        public static readonly DependencyProperty FoldingSectionsProperty = DependencyProperty.Register(
+            "FoldingSections",
+            typeof(IEnumerable<FoldingSection>),
+            typeof(AvalonEditBehaviour),
+            new FrameworkPropertyMetadata(default(IEnumerable<FoldingSection>), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, FoldingSectionsCallback)
+        );
+
+
+
+
 
 
         public string DocumentText
@@ -103,7 +131,6 @@ namespace MaxscriptManager.Src
             }
         }
 
-
         private void OnScrollOffsetChanged(object sender, EventArgs e)
         {
             if (sender is TextView textView)
@@ -111,7 +138,6 @@ namespace MaxscriptManager.Src
                 ScrollOffset = textView.ScrollOffset;
             }
         }
-
 
         private void OnTextChanged(object sender, EventArgs eventArgs)
         {
@@ -153,6 +179,30 @@ namespace MaxscriptManager.Src
             }
         }
 
+
+        private static void FoldingSectionsCallback(DependencyObject s, DependencyPropertyChangedEventArgs e)
+        {
+            var behavior = s as AvalonEditBehaviour;
+            if (behavior.AssociatedObject != null)
+            {
+                var editor = behavior.AssociatedObject as TextEditor;
+                
+                behavior.FoldingSections = behavior.foldingManager.AllFoldings;
+                if (editor.Document != null && behavior.foldingManager != null)
+                {
+                    //behavior.foldingManager = (editor.TextArea.LeftMargins[1] as FoldingMargin).FoldingManager;
+                    List<NewFolding> foldingSections = new List<NewFolding>();
+                    foreach(FoldingSection section in e.NewValue as IEnumerable<FoldingSection>)
+                    {
+                        NewFolding folding = new NewFolding(section.StartOffset, section.EndOffset);
+                        folding.DefaultClosed = section.IsFolded;
+                        foldingSections.Add(folding);
+                    }
+                    behavior.foldingManager.UpdateFoldings(foldingSections, -1);
+                }
+            }
+        }
+
         private static void TextChangedCallback(DependencyObject s, DependencyPropertyChangedEventArgs e)
         {
             var behavior = s as AvalonEditBehaviour;
@@ -161,12 +211,15 @@ namespace MaxscriptManager.Src
                 var editor = behavior.AssociatedObject as TextEditor;
                 if (editor.Document != null)
                 {
+                    behavior.foldingManager = (editor.TextArea.LeftMargins[1] as FoldingMargin).FoldingManager;
+                    if (behavior.foldingManager != null)
+                        behavior.FoldingSections = behavior.foldingManager.AllFoldings;
+
                     int caretOffset = editor.CaretOffset;
                     editor.Document.Text = e.NewValue.ToString();
                     editor.CaretOffset = editor.Document.Text.Length >= caretOffset ? caretOffset : 0;
                     
                 }
-
             }
         } 
 

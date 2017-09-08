@@ -423,8 +423,7 @@
             
             
             <!-- TextEditor -->
-            <Style x:Key="TextEditorStyle" TargetType="{x:Type local:MvvmTextEditor}">
-                <Setter Property="DocumentText" Value="{Binding Description.Code, Source={StaticResource Locator}, Mode=OneWay}" />
+            <Style x:Key="TextEditorStyle" TargetType="{x:Type avalonedit:TextEditor}">
                 <Setter Property="FontFamily" Value="Consolas" />
                 <Setter Property="FontSize" Value="10pt" />
                 <Setter Property="SyntaxHighlighting" Value="{Binding Description.SyntaxHighlighting, Source={StaticResource Locator}}" />
@@ -433,6 +432,10 @@
                 <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
                 <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
                 <Setter Property="Visibility" Value="{Binding Description.EditorPanelVisibility, Source={StaticResource Locator}}" />
+            </Style>
+            
+            <Style x:Key="MvvmTextEditorStyle" TargetType="{x:Type local:MvvmTextEditor}" BasedOn="{StaticResource TextEditorStyle}">
+                <Setter Property="TextDocument" Value="{Binding Description.Document, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Style>
 
 

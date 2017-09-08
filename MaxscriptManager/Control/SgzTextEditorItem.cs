@@ -31,9 +31,9 @@ namespace MaxscriptManager.Control
         public SgzTextEditorItem()
         {
             Content = textEditor;
-            textEditor.Style = Application.Current.Resources["TextEditorStyle"] as Style;
+            textEditor.Style = Application.Current.Resources["MvvmTextEditorStyle"] as Style;
             textEditor.MouseMove += TextEditor_MouseMove;
-            foldingManager = new FoldingManager(textDocument);
+            foldingManager = new FoldingManager(textEditor.TextDocument);
             foldingManager = FoldingManager.Install(textEditor.TextArea);
         }
 

@@ -94,7 +94,7 @@
     <Compile Include="Source\AvalonEditBehaviour.cs" />
     <Compile Include="Source\Converter\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Source\MaxscriptSynthaxCreator.cs" />
-    <Compile Include="Source\Message\MCurrentFilesMessage.cs" />
+    <Compile Include="Source\Message\MCurrentFilesCountMessage.cs" />
     <Compile Include="Source\Message\MSelectedItemMessage.cs" />
     <Compile Include="Model\MCodeItem.cs" />
     <Compile Include="Model\MDataItem.cs" />

@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using MaxscriptManager.Model;
+using MaxscriptManager.Source.Message;
 using MaxscriptManager.Src;
 using SugzTools;
 using SugzTools.Extensions;
@@ -208,6 +209,7 @@ namespace MaxscriptManager.ViewModel
                 CurrentFiles[index - 1].IsSelected = true;
             else
                 SelectedItem = null;
+            MessengerInstance.Send(new MCurrentFilesCountMessage(CurrentFiles.Count));
         }
     }
 

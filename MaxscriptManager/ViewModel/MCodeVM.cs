@@ -6,6 +6,7 @@ using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using MaxscriptManager.Control;
 using MaxscriptManager.Model;
+using MaxscriptManager.Source.Message;
 using MaxscriptManager.Src;
 using SugzTools.Extensions;
 using SugzTools.Src;
@@ -36,10 +37,13 @@ namespace MaxscriptManager.ViewModel
         private bool _ShowCode = true;
         private MDataItem _SelectedItem;                                                                    // Treeview selected item
         //private FlowDocument _Document;                                                                   // The flowdocument 
-        //private TextDocument _Document = new TextDocument();
         private string _Code;
         private int _CaretOffset;
         private Vector _ScrollOffset;
+        private IEnumerable<FoldingSection> _FoldingSections;
+        private UndoStack undoStack;
+
+
 
         private Visibility _EditorPanelVisibility = Visibility.Collapsed;
 
@@ -95,13 +99,52 @@ namespace MaxscriptManager.ViewModel
                 if ((SelectedItem as MCodeItem) is MCodeItem item && item.Code != value)
                 {
                     item.CodeChanged = true;
-                    //item.Code = value;
+                    item.Code = value;
                 }
             }
         }
 
 
+        /// <summary>
+        /// Get or set selected item caret offset
+        /// </summary>
+        public int CaretOffset
+        {
+            get => _CaretOffset;
+            set
+            {
+                Set(ref _CaretOffset, value);
+                if ((SelectedItem as MCodeItem) is MCodeItem item && item.CaretOffset != value)
+                    item.CaretOffset = value;
+            }
+        }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector ScrollOffset
+        {
+            get => _ScrollOffset;
+            set
+            {
+                Set(ref _ScrollOffset, value);
+                if ((SelectedItem as MCodeItem) is MCodeItem item && item.ScrollOffset != value)
+                    item.ScrollOffset = value;
+            }
+        }
+
+
+        public IEnumerable<FoldingSection> FoldingSections
+        {
+            get => _FoldingSections;
+            set
+            {
+                Set(ref _FoldingSections, value);
+                if ((SelectedItem as MCodeItem) is MCodeItem item)
+                    item.FoldingSections = value;
+            }
+        }
 
 
         /// <summary>
@@ -124,6 +167,10 @@ namespace MaxscriptManager.ViewModel
         {
             // Get selected treeview item
             MessengerInstance.Register<MSelectedItemMessage>(this, x => SelectedItem = x.NewItem);
+            MessengerInstance.Register<MCurrentFilesCountMessage>(this, 
+                x => EditorPanelVisibility = x.CurrentFilesCount == 0 ? Visibility.Collapsed : Visibility.Visible);
+
+
             InitializeDocument();
         }
 
@@ -142,8 +189,6 @@ namespace MaxscriptManager.ViewModel
                 using (XmlReader reader = new XmlTextReader(s))
                     SyntaxHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);
             }
-
-            HighlightingManager.Instance.RegisterHighlighting("Custom Highlighting", new string[] { ".cool" }, SyntaxHighlighting);
         }
 
 
@@ -155,11 +200,13 @@ namespace MaxscriptManager.ViewModel
             if ((SelectedItem as MCodeItem) is MCodeItem item)
             {
                 EditorPanelVisibility = Visibility.Visible;
-                if (ShowCode)
-                {
-                    Code = item.Code;
-                    //item.CodeLoaded = true;
-                }
+
+                int caretOffset = item.CaretOffset;
+                IEnumerable<FoldingSection> foldingSections = item.FoldingSections;
+                Code = item.Code;
+                CaretOffset = caretOffset;
+                ScrollOffset = item.ScrollOffset;
+                FoldingSections = foldingSections;
             }
         }
 

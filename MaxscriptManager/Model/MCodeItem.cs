@@ -1,4 +1,6 @@
-﻿using SugzTools.Extensions;
+﻿using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Folding;
+using SugzTools.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +21,9 @@ namespace MaxscriptManager.Model
         private bool _CodeChanged = false;
         private int _CaretOffset = 0;
         private Vector _ScrollOffset;
+        private IEnumerable<FoldingSection> _FoldingSections;
+        private UndoStack _UndoStack;
+        
         private bool _IsActive;
 
         #endregion Fields
@@ -30,7 +35,8 @@ namespace MaxscriptManager.Model
         public StringCollection Description { get; protected set; }
 
 
-        public bool CodeLoaded { get; set; } = false;
+        
+
 
         /// <summary>
         /// 
@@ -70,6 +76,28 @@ namespace MaxscriptManager.Model
             get => _ScrollOffset;
             set => Set(ref _ScrollOffset, value);
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<FoldingSection> FoldingSections
+        {
+            get => _FoldingSections;
+            set => Set(ref _FoldingSections, value);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public UndoStack UndoStack
+        {
+            get => _UndoStack;
+            set => Set(ref _UndoStack, value);
+        }
+
+
 
 
         /// <summary>

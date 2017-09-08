@@ -138,7 +138,8 @@
                 <i:Interaction.Behaviors>
                     <src:AvalonEditBehaviour DocumentText="{Binding Description.Code, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                              CaretOffset="{Binding Description.CaretOffset, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                             ScrollOffset="{Binding Description.ScrollOffset, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                             ScrollOffset="{Binding Description.ScrollOffset, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             FoldingSections="{Binding Description.FoldingSections, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </i:Interaction.Behaviors>
             </avalon:TextEditor>
         </DockPanel>

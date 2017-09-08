@@ -1,4 +1,5 @@
-﻿using MaxscriptManager.Src;
+﻿using ICSharpCode.AvalonEdit.Document;
+using MaxscriptManager.Src;
 using SugzTools.Src;
 using System;
 using System.Collections.Generic;

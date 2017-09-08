@@ -11,6 +11,9 @@ using System.Windows.Media.Animation;
 using System.Windows.Controls;
 using SugzTools.Src;
 using System.Windows.Input;
+using System.IO;
+using System.Xml;
+using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
 namespace MaxscriptManager
 {
@@ -19,9 +22,11 @@ namespace MaxscriptManager
     /// </summary>
     public partial class MView : Window
     {
-        //FoldingManager foldingManager;
-        //MaxscriptFoldingStrategy foldingStrategy = new MaxscriptFoldingStrategy();
+        FoldingManager foldingManager;
+        MaxscriptFoldingStrategy foldingStrategy = new MaxscriptFoldingStrategy();
         double _OldTvWidth = 300;
+
+        public object SyntaxHighlighting { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
@@ -31,12 +36,15 @@ namespace MaxscriptManager
             InitializeComponent();
             Closing += (s, e) => ViewModelLocator.Cleanup();
             showTvBtn.Click += (s, e) => SetLayout();
-            //textEditor.MouseMove += TextEditor_MouseMove;
+            textEditor.MouseMove += TextEditor_MouseMove;
+            InitializeDocument();
             SetLayout();
+        }
 
-            //foldingManager = new FoldingManager(new TextDocument());
-            //foldingManager = FoldingManager.Install(textEditor.TextArea);
-            
+        private void InitializeDocument()
+        {
+            foldingManager = new FoldingManager(new TextDocument());
+            foldingManager = FoldingManager.Install(textEditor.TextArea);
         }
 
         /// <summary>
@@ -63,11 +71,11 @@ namespace MaxscriptManager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        //private void TextEditor_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        //{
-        //    if (e.OriginalSource is FoldingMargin foldingMargin)
-        //        foldingStrategy.UpdateFoldings(foldingManager, textEditor.Document);
-        //}
+        private void TextEditor_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (e.OriginalSource is FoldingMargin foldingMargin)
+                foldingStrategy.UpdateFoldings(foldingManager, textEditor.Document);
+        }
 
 
 
