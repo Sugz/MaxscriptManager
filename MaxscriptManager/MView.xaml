@@ -25,7 +25,8 @@
     </Window.Resources>
 
     <Grid x:Name="LayoutRoot"
-          Background="{DynamicResource DarkPanelColor}">
+          Background="{DynamicResource DarkPanelColor}"
+          DataContext="{Binding Source={StaticResource Locator}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="300" />
@@ -68,7 +69,7 @@
                              Foreground="{Binding Foreground, ElementName=AddFolderBtn}"
                              IsEnabled="False" />
             </sgz:SgzButton>
-            
+
         </DockPanel>
 
         <!-- TreeView -->
@@ -97,11 +98,11 @@
                       ItemsSource="{Binding Data.MaxFolders, Source={StaticResource Locator}}"
                       Visibility="{Binding IsChecked, ElementName=maxFoldersBtn, Converter={StaticResource BoolToVisibility}}"
                       MouseUp="TreeView_MouseUp" />
-            <ToggleButton x:Name="foldersBtn" 
+            <ToggleButton x:Name="foldersBtn"
                           Content="FOLDERS"
-                          Style="{DynamicResource TreeViewsCheckButtonStyle}"/>
+                          Style="{DynamicResource TreeViewsCheckButtonStyle}" />
             <TreeView Style="{DynamicResource FullRowTreeViewStyle}"
-                      ItemContainerStyle ="{StaticResource FullRowTreeViewItemStyle}"
+                      ItemContainerStyle="{StaticResource FullRowTreeViewItemStyle}"
                       ItemsSource="{Binding Data.Folders, Source={StaticResource Locator}}"
                       Visibility="{Binding IsChecked, ElementName=foldersBtn, Converter={StaticResource BoolToVisibility}}"
                       MouseUp="TreeView_MouseUp" />
@@ -109,46 +110,15 @@
 
 
         <!-- Editor -->
-        <DockPanel Grid.Column="2">
-            <local:SgzTabControl Background="{DynamicResource MaxButtonMouseOver}"
-                                 Height="30"
-                                 DockPanel.Dock="Top"
-                                 ItemsSource="{Binding Data.CurrentFiles, Source={StaticResource Locator}}"
-                                 AddTabCommand="{Binding Data.CreateFileCommand, Source={StaticResource Locator}}"
-                                 CloseTabCommand="{Binding Data.RemoveOpenFileCommand, Source={StaticResource Locator}}">
-                <local:SgzTabControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type model:MCodeItem}">
-                        <TextBlock Text="{Binding Text}"
-                                   Margin="10,0"
-                                   VerticalAlignment="Center"
-                                   Foreground="{DynamicResource MaxText}"
-                                   Background="Transparent" />
-                    </DataTemplate>
-                </local:SgzTabControl.ItemTemplate>
-            </local:SgzTabControl>
-            <avalon:TextEditor x:Name="textEditor"
-                               FontFamily="Consolas"
-                               FontSize="10pt"
-                               SyntaxHighlighting="{Binding Description.SyntaxHighlighting, Source={StaticResource Locator}}"
-                               ShowLineNumbers="True"
-                               Foreground="#FFD2D2D2"
-                               ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                               ScrollViewer.VerticalScrollBarVisibility="Auto"
-                               Visibility="{Binding Description.EditorPanelVisibility, Source={StaticResource Locator}}">
-                <i:Interaction.Behaviors>
-                    <src:AvalonEditBehaviour DocumentText="{Binding Description.Code, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                             CaretOffset="{Binding Description.CaretOffset, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                             ScrollOffset="{Binding Description.ScrollOffset, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                             FoldingSections="{Binding Description.FoldingSections, Source={StaticResource Locator}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                </i:Interaction.Behaviors>
-            </avalon:TextEditor>
-        </DockPanel>
-
+        <local:SgzTextEditorsControl ItemsSource="{Binding Data.CurrentFiles}"
+                                     Grid.Column="2"
+                                     AddTabCommand="{Binding Data.CreateFileCommand}"
+                                     CloseTabCommand="{Binding Data.RemoveOpenFileCommand}"/>
 
         <!-- GridSplitter -->
-        <GridSplitter x:Name="gridSplitter" 
+        <GridSplitter x:Name="gridSplitter"
                       Grid.Column="1"
-                      Style="{DynamicResource GridSplitterStyle}"/>
+                      Style="{DynamicResource GridSplitterStyle}" />
 
 
     </Grid>

@@ -97,6 +97,7 @@ namespace MaxscriptManager.Model
             }
 
             Code = code.ToString();
+            Document.Text = code.ToString();
             streamReader.Close();
             return new ObservableCollection<MDataItem>();
         }

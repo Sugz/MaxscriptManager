@@ -1,5 +1,7 @@
-﻿using ICSharpCode.AvalonEdit.Document;
+﻿using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Folding;
+using MaxscriptManager.Source.Message;
 using SugzTools.Extensions;
 using System;
 using System.Collections.Generic;
@@ -17,12 +19,9 @@ namespace MaxscriptManager.Model
 
         #region Fields
 
+        private TextDocument _Document = new TextDocument();
+        private bool _IsModified;
         private string _Code;
-        private bool _CodeChanged = false;
-        private int _CaretOffset = 0;
-        private Vector _ScrollOffset;
-        private IEnumerable<FoldingSection> _FoldingSections;
-        private UndoStack _UndoStack;
         
         private bool _IsActive;
 
@@ -35,9 +34,6 @@ namespace MaxscriptManager.Model
         public StringCollection Description { get; protected set; }
 
 
-        
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -47,56 +43,25 @@ namespace MaxscriptManager.Model
             set => Set(ref _Code, value);
         }
 
-        
-        /// <summary>
-        /// Get or set if the code has changed
-        /// </summary>
-        public bool CodeChanged
-        {
-            get => _CodeChanged;
-            set => Set(ref _CodeChanged, value);
-        }
-
-        
-        /// <summary>
-        /// Get or set the editor caret position
-        /// </summary>
-        public int CaretOffset
-        {
-            get => _CaretOffset;
-            set => Set(ref _CaretOffset, value);
-        }
-
 
         /// <summary>
-        /// Get or set the editor scroll offset
+        /// 
         /// </summary>
-        public Vector ScrollOffset
+        public TextDocument Document
         {
-            get => _ScrollOffset;
-            set => Set(ref _ScrollOffset, value);
+            get => _Document;
+            set => Set(ref _Document, value);
         }
 
 
         /// <summary>
         /// 
         /// </summary>
-        public IEnumerable<FoldingSection> FoldingSections
+        public bool IsModified
         {
-            get => _FoldingSections;
-            set => Set(ref _FoldingSections, value);
+            get => _IsModified;
+            set => Set(ref _IsModified, value);
         }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public UndoStack UndoStack
-        {
-            get => _UndoStack;
-            set => Set(ref _UndoStack, value);
-        }
-
 
 
 
@@ -109,12 +74,15 @@ namespace MaxscriptManager.Model
             set
             {
                 Set(ref _IsActive, value);
+                if (value)
+                    MessengerInstance.Send(new MActiveItemMessage(this));
                 if (value && !_IsSelected)
                     IsSelected = true;
                 else if (!value && _IsSelected)
                     IsSelected = false;
             }
         }
+
 
         /// <summary>
         /// Get or set if this is the selected item in the treeviews except the current
@@ -137,25 +105,10 @@ namespace MaxscriptManager.Model
         #region Constructors
 
 
-        public MCodeItem()
-        {
-
-        }
-        public MCodeItem(object parent)
-        {
-            Parent = parent;
-        }
-        public MCodeItem(object parent, MDataType type )
-        {
-            Parent = parent;
-            DataType = type;
-        }
-        public MCodeItem(object parent, string text, MDataType type)
-        {
-            Parent = parent;
-            Text = text;
-            DataType = type;
-        }
+        public MCodeItem() : this(null, null, MDataType.Script, null) { }
+        public MCodeItem(object parent) : this(parent, null, MDataType.Script, null) { }
+        public MCodeItem(object parent, MDataType type) : this(parent, null, type, null) { }
+        public MCodeItem(object parent, string text, MDataType type) : this(parent, text, type, null) { }
         public MCodeItem(object parent, string text, MDataType type, string code)
         {
             Parent = parent;
@@ -172,6 +125,7 @@ namespace MaxscriptManager.Model
 
 
         protected override ObservableCollection<MDataItem> GetChildren() => null;
+
 
 
         #endregion Methods

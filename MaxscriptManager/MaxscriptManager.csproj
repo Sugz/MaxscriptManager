@@ -87,6 +87,7 @@
     <Compile Include="Control\MvvmTextEditor.cs" />
     <Compile Include="Control\SgzTabControl.cs" />
     <Compile Include="Control\SgzTabItem.cs" />
+    <Compile Include="Control\SgzTextEditor.cs" />
     <Compile Include="Control\SgzTextEditorItem.cs" />
     <Compile Include="Control\SgzTextEditorsControl.cs" />
     <Compile Include="Model\MaxscriptFoldingStrategy.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Source\AvalonEditBehaviour.cs" />
     <Compile Include="Source\Converter\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Source\MaxscriptSynthaxCreator.cs" />
+    <Compile Include="Source\Message\MActiveItemMessage.cs" />
     <Compile Include="Source\Message\MCurrentFilesCountMessage.cs" />
     <Compile Include="Source\Message\MSelectedItemMessage.cs" />
     <Compile Include="Model\MCodeItem.cs" />

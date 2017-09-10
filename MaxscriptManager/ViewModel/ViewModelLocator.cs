@@ -43,7 +43,7 @@ namespace MaxscriptManager.ViewModel
             Justification = "This non-static member is needed for data binding purposes.")]
         public MMainVM Main => ServiceLocator.Current.GetInstance<MMainVM>();
         public MDataVM Data => ServiceLocator.Current.GetInstance<MDataVM>();
-        public MCodeVM Description => ServiceLocator.Current.GetInstance<MCodeVM>();
+        public MCodeVM Code => ServiceLocator.Current.GetInstance<MCodeVM>();
 
         /// <summary>
         /// Cleans up all the resources.

@@ -12,42 +12,64 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Interactivity;
 
 namespace MaxscriptManager.Control
 {
     public class SgzTextEditorItem : TabItem
     {
-        MvvmTextEditor textEditor = new MvvmTextEditor();
-        FoldingManager foldingManager;
-        MaxscriptFoldingStrategy foldingStrategy = new MaxscriptFoldingStrategy();
-        TextDocument textDocument = new TextDocument();
+        private SgzTextEditor textEditor = new SgzTextEditor();
+        private SgzTextEditorsControl ParentTabControl => ItemsControl.ItemsControlFromItemContainer(this) as SgzTextEditorsControl;
+
+
+        public static RoutedUICommand CloseTabCommand => _CloseTabCommand;
+        private static readonly RoutedUICommand _CloseTabCommand = new RoutedUICommand(
+            "Close tab",
+            "CloseTab",
+            typeof(SgzTextEditorItem));
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsModified
+        {
+            get => (bool)GetValue(IsModifiedProperty);
+            set => SetValue(IsModifiedProperty, value);
+        }
+
+        // DependencyProperty as the backing store for IsModified
+        public static readonly DependencyProperty IsModifiedProperty = DependencyProperty.Register(
+            "IsModified",
+            typeof(bool),
+            typeof(SgzTextEditorItem),
+            new PropertyMetadata(false)
+        );
+
+
+
+
 
 
         static SgzTextEditorItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SgzTextEditorItem), new FrameworkPropertyMetadata(typeof(SgzTextEditorItem)));
+            CommandManager.RegisterClassCommandBinding(typeof(SgzTextEditorItem), new CommandBinding(_CloseTabCommand, CloseTab));
         }
         public SgzTextEditorItem()
         {
             Content = textEditor;
-            textEditor.Style = Application.Current.Resources["MvvmTextEditorStyle"] as Style;
-            textEditor.MouseMove += TextEditor_MouseMove;
-            foldingManager = new FoldingManager(textEditor.TextDocument);
-            foldingManager = FoldingManager.Install(textEditor.TextArea);
+            textEditor.Style = Application.Current.Resources["TextEditorStyle"] as Style;
         }
 
 
-        /// <summary>
-        /// Show the block foldings when the mouse enter the area
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TextEditor_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+
+        private static void CloseTab(object sender, ExecutedRoutedEventArgs e)
         {
-            if (e.OriginalSource is FoldingMargin foldingMargin)
-                foldingStrategy.UpdateFoldings(foldingManager, textEditor.Document);
+            if (sender is SgzTextEditorItem item)
+                item.ParentTabControl.RemoveTab(item);
         }
-
     }
 }
